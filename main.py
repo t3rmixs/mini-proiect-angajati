@@ -32,16 +32,17 @@ def main():
 
     while True:
         afisare_meniu()
-        alege = input("Alege o optiune de la 1-12: ")
+        alege = input("Alege o optiune de la 0-12: ")
         
         try:
             alege_numar = (int(alege))
 
-            if alege_numar < 1 or alege_numar > 12:
+            if alege_numar < 0 or alege_numar > 12:
                 print("Eroare: Numarul trebuie sa fie intre 1-12")
                 continue
         except ValueError:
             print(f"Eroare: Trebuie sa introduceti un numar valid (ai introdus '{alege}')")
+            continue
 
         if alege == "0":
             print("Program inchis.")
