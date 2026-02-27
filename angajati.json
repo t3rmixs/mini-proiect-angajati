@@ -27,24 +27,6 @@
         "senioritate": "junior"
     },
     {
-        "cnp": "9999999999999",
-        "nume": "Alexandru",
-        "prenume": "Popopnescu",
-        "varsta": 18,
-        "salar": 9999.0,
-        "departament": "IT",
-        "senioritate": "senior"
-    },
-    {
-        "cnp": "0000000000001",
-        "nume": "Ana",
-        "prenume": "Merlin",
-        "varsta": 18,
-        "salar": 4520.0,
-        "departament": "HR",
-        "senioritate": "junior"
-    },
-    {
         "cnp": "7777777777777",
         "nume": "Mircea",
         "prenume": "Celbatran",

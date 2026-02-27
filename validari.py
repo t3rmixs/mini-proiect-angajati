@@ -12,7 +12,7 @@ def cere_cnp_valid():
     """
     """
     while True:
-        cnp = input("introduceti CNP-ul (13 cifre) sau '0' pentru meniu: ").strip()
+        cnp = input("Introduceti CNP-ul (13 cifre) sau '0' pentru meniu: ").strip()
 
         if cnp == "0":
             return "0"

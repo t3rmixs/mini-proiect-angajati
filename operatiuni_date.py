@@ -1,3 +1,4 @@
+import os
 import validari
 import incarcare_salvare
 import calculare
@@ -9,6 +10,9 @@ def adaugare_angajat(angajati):
     print("\n ---> Adagua un angajat ")
 
     cnp = validari.cere_cnp_valid()
+    if cnp == "0":
+        return "0"
+
     for persoana in angajati:
         if persoana["cnp"] == cnp:
             print(f"Eroare: Acest {cnp} CNP a fost deja introdus pentru alta persoana")
@@ -171,9 +175,11 @@ def modificare_angajat(angajati):
                         persoana["senioritate"] = senioritate_noua
 
                 if incarcare_salvare.salveaza_fisier_angajati(angajati):
+                    print("-"*30)
                     print(f"Datele pentru angajatul '{persoana['nume']} {persoana['prenume']}' au fost salvate cu success!")
                 return
-        print(f"Nu sa gasit nici un angajat cu CNP-ul '{cnp}' ")
+        print(f"Nu sa gasit nici un angajat cu CNP-ul: '{cnp}' ")
+
 
 def sterge_angajat(angajati):
     """
@@ -184,7 +190,8 @@ def sterge_angajat(angajati):
         cnp = validari.cere_cnp_valid()
 
         if cnp == "0":
-            return
+            return "0"
+        
         gasit = False
 
         for persoana, angajat in enumerate(angajati):
@@ -194,8 +201,21 @@ def sterge_angajat(angajati):
                 while True:
                     confirmare = input(f"Sigur doriti sa stergeti angajatul '{angajat['nume']} {angajat['prenume']}' (da/nu): ").strip().lower()
                     if confirmare.lower() == "da":
+
+                        fluturas_fisier = f"fluturasi_angajati/fluturas_{cnp}.json"
+
+                        if os.path.exists(fluturas_fisier):
+                            sterge_fluturas = input("Fluturas gasit , vrei sa stergi acest fisier? (da/nu): ").strip().lower()
+                            if sterge_fluturas == "da":
+                                os.remove(fluturas_fisier)
+                                print("-"*30)
+                                print(f"Fluturasul pentru '{angajat['nume']} {angajat['prenume']}' cu CNP-ul {angajat['cnp']} a fost sters.")
+                            else:
+                                print(f"Fisierul a ramas inca pe disk tu ai ales {sterge_fluturas}")
+
                         angajati.pop(persoana)
                         if incarcare_salvare.salveaza_fisier_angajati(angajati):
+                            print("-"*30)
                             print(f"Angajatul '{angajat['nume']} {angajat['prenume']}' sters cu success!")
                         else:
                             print("Eroare la salvare!")
@@ -208,11 +228,45 @@ def sterge_angajat(angajati):
         if not gasit:        
             print(f"Nu sa gasit nici un angajat cu CNP-ul '{cnp}' \n")
 
+# def sterge_angajat(angajati):
+#     """
+#     """
+#     print("--> Sterge un angajat")
+
+#     while True:
+#         cnp = validari.cere_cnp_valid()
+
+#         if cnp == "0":
+#             return
+#         gasit = False
+
+#         for persoana, angajat in enumerate(angajati):
+#             if angajat['cnp'] == cnp:
+#                 gasit = True
+
+#                 while True:
+#                     confirmare = input(f"Sigur doriti sa stergeti angajatul '{angajat['nume']} {angajat['prenume']}' (da/nu): ").strip().lower()
+#                     if confirmare.lower() == "da":
+#                         angajati.pop(persoana)
+#                         if incarcare_salvare.salveaza_fisier_angajati(angajati):
+#                             print("-"*30)
+#                             print(f"Angajatul '{angajat['nume']} {angajat['prenume']}' sters cu success!")
+#                         else:
+#                             print("Eroare la salvare!")
+#                         return
+#                     elif confirmare == "nu":
+#                         print(f"Operatiune oprita!")
+#                         break
+#                     else:
+#                         print(f"Eroare: Intodu (da/nu) tu ai introdus '{confirmare}' Inceacra din nou sau apasa '0' pentru meniu")
+#         if not gasit:        
+#             print(f"Nu sa gasit nici un angajat cu CNP-ul '{cnp}' \n")
+
 def afisare_toti_angajatii(angajati):
     """
     """
 
-    print(f"\n --> Lista de angajati | Total de [{len(angajati)}] angajati")
+    print(f"\n --> Lista de angajati | Total de  [ {len(angajati)} ] angajati in companie")
 
     if not angajati:
         print("Nu exista nici un angajat")
