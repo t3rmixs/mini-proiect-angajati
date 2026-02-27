@@ -1,5 +1,4 @@
 
-# nume_fisier = "angajati.json"
 salariu_minim = 4050
 aceptare_nivel = ["junior","mid","senior"]
 
@@ -77,11 +76,11 @@ def salariu_validare(salar: str) -> bool:
 def departament_validare(departament):
     """
     """
-    if departament.isdigit():
-        print("Departamentul trebuie sa contina Litere")
+    if not departament.isalnum():
+        print(f"Departamentul nu poate contine charactere speciale , poate sa contina doar Litere/Cifre")
         return False
     if len(departament) < 2:
-        print("Numele departamentului este prea scurt")
+        print(f"Numele departamentului este prea scurt tu ai introdus '{len(departament)}' caracter  ")
         return False
 
     

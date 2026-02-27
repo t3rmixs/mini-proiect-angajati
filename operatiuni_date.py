@@ -3,7 +3,6 @@ import incarcare_salvare
 import calculare
 
 
-
 def adaugare_angajat(angajati):
     """
     """
@@ -40,7 +39,7 @@ def adaugare_angajat(angajati):
         print(f"Eroare: Salariu trebuie sa fie mai mare de {validari.salariu_minim} RON.")
     
     departamente_disponibile = set(persoana["departament"] for persoana in angajati)
-    departament = input(f"Departament (disponibile {departamente_disponibile} ) sau creaza unu nou: ").strip().upper()
+    departament = input(f"Departament (disponibile {departamente_disponibile} ) sau creaza unul nou: ").strip().upper()
 
     while True:
         senioritate = input(f"Senerioaritate (acceptate {validari.aceptare_nivel}): ").lower()
@@ -106,46 +105,45 @@ def modificare_angajat(angajati):
                 cnp_nou = input("Introdu un cnp nou sau apasa 'enter' pentru a il pastra: ").strip()
                 if cnp_nou:
                     while not validari.cnp_validare(cnp_nou):
-                        cnp_nou = input("Introdu un cnp nou valid: ").strip()
+                        cnp_nou = input("Introdu un cnp nou valid sau apasa 'enter' pentru a il pastra: ").strip()
                         if not cnp_nou:
                             break
                     if cnp_nou:
                         persoana["cnp"] = cnp_nou
 
-                nume_nou = input("Introdu un nume nou: ").strip().title()
+                nume_nou = input("Introdu un nume nou sau apasa 'enter' pentru a il pastra: ").strip().title()
                 if nume_nou:
                     while not validari.validare_nume(nume_nou):
-                        nume_nou = input("Introdu un nume nou valid: ").strip().title()
+                        nume_nou = input("Introdu un nume nou valid sau apasa 'enter' pentru a il pastra: ").strip().title()
                         if not nume_nou:
                             break
                     if nume_nou:
                         persoana["nume"] = nume_nou.title()
 
 
-                prenume_nou = input("Introdu un prenume nou: ").strip().title()
+                prenume_nou = input("Introdu un prenume nou sau apasa 'enter' pentru a il pastra : ").strip().title()
                 if prenume_nou:
                     while not validari.validare_nume(prenume_nou):
-                        prenume_nou = input("Introdu un prenume nou valid: ").strip().title()
+                        prenume_nou = input("Introdu un prenume nou valid sau apasa 'enter' pentru a il pastra: ").strip().title()
                         if not prenume_nou:
                             break
                     if prenume_nou:
                         persoana["prenume"] = prenume_nou.title()
 
 
-                varsta_noua = input("Introdu o varsta noua: ")
+                varsta_noua = input("Introdu o varsta noua sau apasa 'enter' pentru a il pastra: ")
                 if varsta_noua:
                     while not validari.varsta_validare(varsta_noua):
-                        varsta_noua = input("Introdu o varsta noua: ")
+                        varsta_noua = input("Introdu o varsta noua sau apasa 'enter' pentru a il pastra: ")
                         if not varsta_noua:
                             break
                     if varsta_noua:
                         persoana["varsta"] = int(varsta_noua)
                 
-                salariu_nou = input(f"Introdu un salariu nou (minim {validari.salariu_minim}): ")
+                salariu_nou = input(f"Introdu un salariu nou (minim {validari.salariu_minim}) sau apasa 'enter' pentru a il pastra: ")
                 if salariu_nou:
                     while not validari.salariu_validare(salariu_nou):
-                        #print("Salariu invalid! Incearca din nou ")
-                        salariu_nou = input(f"Introdu un salariu nou (minim {validari.salariu_minim}): ")
+                        salariu_nou = input(f"Introdu un salariu nou (minim {validari.salariu_minim}) sau apasa 'enter' pentru a il pastra: ")
                         if not salariu_nou:
                             break
                     if salariu_nou:
@@ -157,16 +155,16 @@ def modificare_angajat(angajati):
                 departament_nou = input(f"Introdu un departament nou (disponibile {departamente_disponibile}) sau creaza unu nou: ").strip().upper()
                 if departament_nou:
                     while not validari.departament_validare(departament_nou):
-                        departament_nou = input(f"Introdu un departament nou (disponibile {departamente_disponibile}) sau creaza unu nou:: ").strip().upper()
+                        departament_nou = input(f"Introdu un departament nou (disponibile {departamente_disponibile}) sau creaza unu nou: ").strip().upper()
                         if not departament_nou:
                             break
                     if departament_nou:
                         persoana["departament"] = departament_nou
                 
-                senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}): ").strip().lower()
+                senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) sau apasa 'enter' pentru a il pastra: ").strip().lower()
                 if senioritate_noua:
                     while not validari.senior_validare(senioritate_noua):
-                        senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) : ").strip().lower()
+                        senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) sau apasa 'enter' pentru a il pastra : ").strip().lower()
                         if not senioritate_noua:
                             break
                     if senioritate_noua:

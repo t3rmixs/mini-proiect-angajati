@@ -3,10 +3,10 @@
         "cnp": "1111111111111",
         "nume": "Angelo",
         "prenume": "necsu",
-        "varsta": 23,
-        "salar": 4444.0,
+        "varsta": 30,
+        "salar": 5000.0,
         "departament": "HR",
-        "senioritate": "junior"
+        "senioritate": "mid"
     },
     {
         "cnp": "2222222222222",
