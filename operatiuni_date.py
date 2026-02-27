@@ -228,39 +228,6 @@ def sterge_angajat(angajati):
         if not gasit:        
             print(f"Nu sa gasit nici un angajat cu CNP-ul '{cnp}' \n")
 
-# def sterge_angajat(angajati):
-#     """
-#     """
-#     print("--> Sterge un angajat")
-
-#     while True:
-#         cnp = validari.cere_cnp_valid()
-
-#         if cnp == "0":
-#             return
-#         gasit = False
-
-#         for persoana, angajat in enumerate(angajati):
-#             if angajat['cnp'] == cnp:
-#                 gasit = True
-
-#                 while True:
-#                     confirmare = input(f"Sigur doriti sa stergeti angajatul '{angajat['nume']} {angajat['prenume']}' (da/nu): ").strip().lower()
-#                     if confirmare.lower() == "da":
-#                         angajati.pop(persoana)
-#                         if incarcare_salvare.salveaza_fisier_angajati(angajati):
-#                             print("-"*30)
-#                             print(f"Angajatul '{angajat['nume']} {angajat['prenume']}' sters cu success!")
-#                         else:
-#                             print("Eroare la salvare!")
-#                         return
-#                     elif confirmare == "nu":
-#                         print(f"Operatiune oprita!")
-#                         break
-#                     else:
-#                         print(f"Eroare: Intodu (da/nu) tu ai introdus '{confirmare}' Inceacra din nou sau apasa '0' pentru meniu")
-#         if not gasit:        
-#             print(f"Nu sa gasit nici un angajat cu CNP-ul '{cnp}' \n")
 
 def afisare_toti_angajatii(angajati):
     """
