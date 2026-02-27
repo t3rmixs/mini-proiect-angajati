@@ -76,13 +76,6 @@ def cautare_angajat(angajati):
         cnp = validari.cere_cnp_valid()
         if cnp == "0":
             return
-        # if not cnp_cautat.isdigit():
-        #     print("CNP NU este valid, trebuie sa contina doar cifre!")
-        #     continue
-
-        # if len(cnp_cautat) != 13:
-        #     print("CNP NU este valid trebuie sa aiba 13 cifre!")
-        #     continue
 
         gasit = False
         for persoana in angajati: 
@@ -142,7 +135,6 @@ def modificare_angajat(angajati):
                 varsta_noua = input("Introdu o varsta noua: ")
                 if varsta_noua:
                     while not validari.varsta_validare(varsta_noua):
-                        #print("Varsta invalida! Incearca din nou")
                         varsta_noua = input("Introdu o varsta noua: ")
                         if not varsta_noua:
                             break
@@ -159,15 +151,8 @@ def modificare_angajat(angajati):
                     if salariu_nou:
                         persoana["salar"] = float(salariu_nou)
                 
-                # print("\n--> Departamente disponibile sau creati unul nou")
+
                 departamente_disponibile = set(persoana["departament"] for persoana in angajati)
-                # if departamente_disponibile:
-                #     for departament in sorted(departamente_disponibile):
-                        
-                        # print(f"-----> {departament}")
-                # else:
-                #     print("Nu exista departamente in baza de date")
-                
 
                 departament_nou = input(f"Introdu un departament nou (disponibile {departamente_disponibile}) sau creaza unu nou: ").strip().upper()
                 if departament_nou:
@@ -181,15 +166,11 @@ def modificare_angajat(angajati):
                 senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}): ").strip().lower()
                 if senioritate_noua:
                     while not validari.senior_validare(senioritate_noua):
-                        #print(f" Senioritate invalida: {validari.aceptare_nivel} ") 
                         senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) : ").strip().lower()
                         if not senioritate_noua:
                             break
                     if senioritate_noua:
                         persoana["senioritate"] = senioritate_noua
-                    #     persoana["senioritate"] = senioritate_noua
-                    # else: 
-                    #     print("Seniorite invalida")
 
                 if incarcare_salvare.salveaza_fisier_angajati(angajati):
                     print(f"Datele pentru angajatul '{persoana['nume']} {persoana['prenume']}' au fost salvate cu success!")
@@ -241,8 +222,6 @@ def afisare_toti_angajatii(angajati):
     
     for persoane in angajati:
         print(f"{persoane['nume']} {persoane['prenume']} | CNP: {persoane['cnp']} | Departament: {persoane['departament']} | Senioritate: {persoane['senioritate']}" )
-    # print("-"*30)
-    # print(f"--> Total de {len(angajati)} angajati in companie")
 
 
 def afiseaza_total_salarii(angajati):
@@ -283,13 +262,6 @@ def afisare_dupa_departament(angajati):
     print("-"*30)
 
     departamente_disponibile = set(persoana["departament"] for persoana in angajati)
-    # if departamente_disponibile:
-    #     print("--> Departamente disponibile: ")
-    #     for depart in sorted(departamente_disponibile):
-    #         print(f"-----> {depart}")
-    # else:
-    #     print("Nu exista angajati in baza de date!")
-    #     return
 
     departament_cautat = input(f"Introdu un departament (disponibile {departamente_disponibile}): ").strip().upper()
     gasit = False

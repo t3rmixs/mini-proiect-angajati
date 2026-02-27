@@ -1,16 +1,5 @@
 import validari
 
-# def calcul_total_salarii_companie(angajati):
-#     """
-#     """
-#     print("\n --> Cost Total salarii ")
-
-#     total= 0
-#     for persoana in angajati:
-#         total += float(persoana["salar"])
-
-#     print(f"Cost total lunar salarii este {total} RON")
-
 
 def obtine_total_salarii(angajati):
     """
@@ -28,13 +17,7 @@ def calcul_total_salarii_departament(angajati):
     print("-"*30)
 
     departamente_disponibile = set(persoana["departament"] for persoana in angajati)
-    # if departamente_disponibile:
-    #     print("--> Departamente disponibile: ")
-    #     for depart in sorted(departamente_disponibile):
-    #         print(f"-----> {depart}")
-    # else:
-    #     print("Nu exista angajati in baza de date!")
-    #     return
+
     cautare_departament = input(f"Introduceti un departament (disponibile {departamente_disponibile}) sau creaza unu nou: ").strip().upper()
 
     total = 0

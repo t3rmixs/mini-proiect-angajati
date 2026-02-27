@@ -1,5 +1,3 @@
-# exporteaza fluturasii de salariu intrun folder dupa care sa ii poti afisa in consola dupa CNP
-
 import os
 import validari
 import json
@@ -43,18 +41,6 @@ def exporteaza_fluturas(angajati):
                     "Salariu net" : round(net) /2
 
                 }
-                # date_fluturas = {
-                #     "nume" : persoana['nume'],
-                #     "prenume" : persoana['prenume'],
-                #     "cnp" : persoana['cnp'],
-                #     "departament" : persoana['departament'],
-                #     "salariu brut" : brut,
-                #     "cas" : round(cas) /2 ,
-                #     "cass" : round(cass) /2,
-                #     "impozit" : round(impozit) /2,
-                #     "salariu net" : round(net) /2
-
-                # }
 
                 with open(nume_fisier, "w") as my_file:
                     json.dump(date_fluturas, my_file ,indent=4)
@@ -64,22 +50,6 @@ def exporteaza_fluturas(angajati):
             
         if not gasit :
             print(f"Nu s-a gasit nici un angajat cu CNP-ul {cnp}")
-
-                # with open(nume_fisier, "w") as my_file:
-                #     my_file.write(f"Nume: {persoana['nume']}\n")
-                #     my_file.write(f"Prenume: {persoana['prenume']}\n")
-                #     my_file.write(f"CNP: {persoana['cnp']}\n")
-                #     my_file.write(f"Departament: {persoana['departament']}\n")
-                #     my_file.write(f"Salariu Brut: {brut}\n")
-                #     my_file.write(f"CAS (10%): {cas}\n")
-                #     my_file.write(f"CASS (25%): {cass}")
-                #     my_file.write(f"Impozit (10%): {impozit}\n")
-                #     my_file.write(f"Salariu Net: {net}\n")
-                # print(f"Fisier creat cu success : {nume_fisier}\n") 
-                # return
-
-        # if not gasit:
-        #     print(f"Nu sa gasit nici un angajat cu CNP-ul {cnp}")
 
 
 def afisare_fluturas_din_fisier():
@@ -121,12 +91,3 @@ def afisare_fluturas_din_fisier():
 
         print("-"*30)
         return
-    
-            # continut = my_file.read()
-
-            # for linie in continut.split("\n"):
-            #     camp, valoare = linie.split(":", 1)
-            #     print(f" {camp}: {valoare}")
-        
-        print("-" *30)
-        print("Fisierul a fost gasit ")
