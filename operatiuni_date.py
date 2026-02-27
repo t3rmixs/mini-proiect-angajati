@@ -1,4 +1,5 @@
 import os
+import json
 import validari
 import incarcare_salvare
 import calculare
@@ -111,7 +112,7 @@ def modificare_angajat(angajati):
                 cnp_nou = input("Introdu un cnp nou sau apasa 'enter' pentru a il pastra: ").strip()
                 if cnp_nou:
                     while not validari.cnp_validare(cnp_nou):
-                        cnp_nou = input("Introdu un cnp nou valid sau apasa 'enter' pentru a il pastra: ").strip()
+                        cnp_nou = input("Introdu un cnp nou valid sau apasa 'enter' pentru a-l pastra: ").strip()
                         if not cnp_nou:
                             break
                     if cnp_nou:
@@ -124,8 +125,18 @@ def modificare_angajat(angajati):
 
                             cale_veche = f"fluturasi_angajati/fluturas_{cnp_vechi}.json"
                             cale_noua = f"fluturasi_angajati/fluturas_{cnp_nou}.json"
+
                             if os.path.exists(cale_veche):
-                                os.rename(cale_veche,cale_noua)
+                                with open (cale_veche, "r") as my_file:
+                                    date_fluturas = json.load(my_file)
+
+                                date_fluturas["cnp"] = cnp_nou
+                                
+                                with open(cale_noua, "w") as my_file:
+                                    json.dump(date_fluturas, my_file, indent=4)
+
+                                os.remove(cale_veche)
+                                # os.rename(cale_veche,cale_noua)
                                 print(f" Fisierul fluturas a fost redenumit din '{cnp_vechi}' in '{cnp_nou}' ")
 
 

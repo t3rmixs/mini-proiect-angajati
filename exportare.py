@@ -32,7 +32,7 @@ def exporteaza_fluturas(angajati):
                 date_fluturas = {
                     "Nume" : persoana['nume'],
                     "Prenume" : persoana['prenume'],
-                    "CNP" : persoana['cnp'],
+                    "cnp" : persoana['cnp'],
                     "Departament" : persoana['departament'],
                     "Salariu brut" : brut,
                     "Cas (10%)" : round(cas) /2 ,
