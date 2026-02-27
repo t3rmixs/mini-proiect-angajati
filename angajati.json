@@ -27,7 +27,7 @@
         "senioritate": "junior"
     },
     {
-        "cnp": "7777777777777",
+        "cnp": "7777777777772",
         "nume": "Mircea",
         "prenume": "Celbatran",
         "varsta": 18,
@@ -37,6 +37,15 @@
     },
     {
         "cnp": "3232323223326",
+        "nume": "Paul",
+        "prenume": "Margeru",
+        "varsta": 18,
+        "salar": 4050.0,
+        "departament": "MARKETING",
+        "senioritate": "mid"
+    },
+    {
+        "cnp": "9999999999999",
         "nume": "Paul",
         "prenume": "Margeru",
         "varsta": 18,

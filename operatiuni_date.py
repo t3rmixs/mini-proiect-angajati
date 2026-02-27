@@ -106,6 +106,8 @@ def modificare_angajat(angajati):
 
                 print(f"----> Mofica datele pentru '{persoana['nume']} {persoana['prenume']}'")
 
+                cnp_vechi = persoana["cnp"]
+
                 cnp_nou = input("Introdu un cnp nou sau apasa 'enter' pentru a il pastra: ").strip()
                 if cnp_nou:
                     while not validari.cnp_validare(cnp_nou):
@@ -113,7 +115,19 @@ def modificare_angajat(angajati):
                         if not cnp_nou:
                             break
                     if cnp_nou:
-                        persoana["cnp"] = cnp_nou
+                        # persoana["cnp"] = cnp_nou
+                        toate_cnpuriile = [persoana["cnp"] for persoana in angajati]
+                        if cnp_nou in toate_cnpuriile:
+                            print(f"Eroare: CNP-ul '{cnp_nou}' apartine deja a altui angajat! ")
+                        else:
+                            persoana["cnp"] = cnp_nou
+
+                            cale_veche = f"fluturasi_angajati/fluturas_{cnp_vechi}.json"
+                            cale_noua = f"fluturasi_angajati/fluturas_{cnp_nou}.json"
+                            if os.path.exists(cale_veche):
+                                os.rename(cale_veche,cale_noua)
+                                print(f" Fisierul fluturas a fost redenumit din '{cnp_vechi}' in '{cnp_nou}' ")
+
 
                 nume_nou = input("Introdu un nume nou sau apasa 'enter' pentru a il pastra: ").strip().title()
                 if nume_nou:
