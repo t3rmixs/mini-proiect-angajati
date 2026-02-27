@@ -27,12 +27,12 @@
         "senioritate": "junior"
     },
     {
-        "cnp": "7777777777770",
-        "nume": "Maximilian",
-        "prenume": "Bordea",
-        "varsta": 18,
-        "salar": 6666.0,
-        "departament": "SALES",
+        "cnp": "7777777777700",
+        "nume": "Robert",
+        "prenume": "Moldo",
+        "varsta": 25,
+        "salar": 5500.0,
+        "departament": "IT",
         "senioritate": "mid"
     },
     {
@@ -45,7 +45,7 @@
         "senioritate": "mid"
     },
     {
-        "cnp": "9999999999999",
+        "cnp": "9999999999990",
         "nume": "Paul",
         "prenume": "Margeru",
         "varsta": 18,

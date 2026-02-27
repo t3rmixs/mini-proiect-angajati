@@ -7,8 +7,6 @@ def exporteaza_fluturas(angajati):
     """
     print("\n-- Export fluturasi de salar")
 
-    
-    
     while True:
         cnp = validari.cere_cnp_valid()
            
@@ -21,8 +19,8 @@ def exporteaza_fluturas(angajati):
                 gasit = True
 
                 brut = float(persoana["salar"])
-                cas = brut * 0.10
-                cass = brut * 0.25
+                cas = brut * 0.25
+                cass = brut * 0.10
                 impozitare_baza = brut - cas - cass
                 impozit = impozitare_baza * 0.10
                 net = brut - cas - cass - impozit
@@ -50,6 +48,36 @@ def exporteaza_fluturas(angajati):
             
         if not gasit :
             print(f"Nu s-a gasit nici un angajat cu CNP-ul {cnp}")
+
+
+def actualizare_fluturas_fisier(persoana):
+    """
+    """
+    brut = float(persoana["salar"])
+    cas = brut * 0.25
+    cass = brut * 0.10
+    impozitare_baza = brut - cas - cass
+    impozit = impozitare_baza * 0.10
+    net = brut - cas - cass - impozit
+
+    cnp = persoana["cnp"]
+
+    nume_fisier = f"fluturasi_angajati/fluturas_{cnp}.json"
+
+    date_fluturas = {
+        "Nume": persoana['nume'],
+        "Prenume": persoana['prenume'],
+        "CNP": persoana['cnp'],
+        "Departament": persoana['departament'],
+        "Salariu brut": brut,
+        "Cas (25%)": round(cas, 2),
+        "Cass (10%)": round(cass, 2),
+        "Impozit (10%)": round(impozit, 2),
+        "Salariu net": round(net, 2)
+    }
+
+    with open(nume_fisier, "w") as my_file:
+        json.dump(date_fluturas, my_file, indent=4)
 
 
 def afisare_fluturas_din_fisier():

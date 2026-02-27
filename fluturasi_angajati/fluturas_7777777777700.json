@@ -1,0 +1,11 @@
+{
+    "Nume": "Robert",
+    "Prenume": "Moldo",
+    "CNP": "7777777777700",
+    "Departament": "IT",
+    "Salariu brut": 5500.0,
+    "Cas (25%)": 1375.0,
+    "Cass (10%)": 550.0,
+    "Impozit (10%)": 357.5,
+    "Salariu net": 3217.5
+}

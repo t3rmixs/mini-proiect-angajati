@@ -1,5 +1,6 @@
 import os
 import json
+import exportare
 import validari
 import incarcare_salvare
 import calculare
@@ -109,7 +110,7 @@ def modificare_angajat(angajati):
 
                 cnp_vechi = persoana["cnp"]
 
-                cnp_nou = input("Introdu un cnp nou sau apasa 'enter' pentru a il pastra: ").strip()
+                cnp_nou = input("Introdu un cnp nou sau apasa 'enter' pentru a-l pastra: ").strip()
                 if cnp_nou:
                     while not validari.cnp_validare(cnp_nou):
                         cnp_nou = input("Introdu un cnp nou valid sau apasa 'enter' pentru a-l pastra: ").strip()
@@ -140,39 +141,39 @@ def modificare_angajat(angajati):
                                 print(f" Fisierul fluturas a fost redenumit din '{cnp_vechi}' in '{cnp_nou}' ")
 
 
-                nume_nou = input("Introdu un nume nou sau apasa 'enter' pentru a il pastra: ").strip().title()
+                nume_nou = input("Introdu un nume nou sau apasa 'enter' pentru a-l pastra: ").strip().title()
                 if nume_nou:
                     while not validari.validare_nume(nume_nou):
-                        nume_nou = input("Introdu un nume nou valid sau apasa 'enter' pentru a il pastra: ").strip().title()
+                        nume_nou = input("Introdu un nume nou valid sau apasa 'enter' pentru a-l pastra: ").strip().title()
                         if not nume_nou:
                             break
                     if nume_nou:
                         persoana["nume"] = nume_nou.title()
 
 
-                prenume_nou = input("Introdu un prenume nou sau apasa 'enter' pentru a il pastra : ").strip().title()
+                prenume_nou = input("Introdu un prenume nou sau apasa 'enter' pentru a-l pastra: ").strip().title()
                 if prenume_nou:
                     while not validari.validare_nume(prenume_nou):
-                        prenume_nou = input("Introdu un prenume nou valid sau apasa 'enter' pentru a il pastra: ").strip().title()
+                        prenume_nou = input("Introdu un prenume nou valid sau apasa 'enter' pentru a-l pastra: ").strip().title()
                         if not prenume_nou:
                             break
                     if prenume_nou:
                         persoana["prenume"] = prenume_nou.title()
 
 
-                varsta_noua = input("Introdu o varsta noua sau apasa 'enter' pentru a il pastra: ")
+                varsta_noua = input("Introdu o varsta noua sau apasa 'enter' pentru a-l pastra: ")
                 if varsta_noua:
                     while not validari.varsta_validare(varsta_noua):
-                        varsta_noua = input("Introdu o varsta noua sau apasa 'enter' pentru a il pastra: ")
+                        varsta_noua = input("Introdu o varsta noua sau apasa 'enter' pentru a-l pastra: ")
                         if not varsta_noua:
                             break
                     if varsta_noua:
                         persoana["varsta"] = int(varsta_noua)
                 
-                salariu_nou = input(f"Introdu un salariu nou (minim {validari.salariu_minim}) sau apasa 'enter' pentru a il pastra: ")
+                salariu_nou = input(f"Introdu un salariu nou (minim {validari.salariu_minim}) sau apasa 'enter' pentru a-l pastra: ")
                 if salariu_nou:
                     while not validari.salariu_validare(salariu_nou):
-                        salariu_nou = input(f"Introdu un salariu nou (minim {validari.salariu_minim}) sau apasa 'enter' pentru a il pastra: ")
+                        salariu_nou = input(f"Introdu un salariu nou (minim {validari.salariu_minim}) sau apasa 'enter' pentru a-l pastra: ")
                         if not salariu_nou:
                             break
                     if salariu_nou:
@@ -190,10 +191,10 @@ def modificare_angajat(angajati):
                     if departament_nou:
                         persoana["departament"] = departament_nou
                 
-                senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) sau apasa 'enter' pentru a il pastra: ").strip().lower()
+                senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) sau apasa 'enter' pentru a-l pastra: ").strip().lower()
                 if senioritate_noua:
                     while not validari.senior_validare(senioritate_noua):
-                        senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) sau apasa 'enter' pentru a il pastra : ").strip().lower()
+                        senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) sau apasa 'enter' pentru a-l pastra : ").strip().lower()
                         if not senioritate_noua:
                             break
                     if senioritate_noua:
@@ -202,7 +203,14 @@ def modificare_angajat(angajati):
                 if incarcare_salvare.salveaza_fisier_angajati(angajati):
                     print("-"*30)
                     print(f"Datele pentru angajatul '{persoana['nume']} {persoana['prenume']}' au fost salvate cu success!")
-                return
+                #return
+            
+                    #incearca sa salvezi in fluturas daca exista 
+                    cale_fluturas = f"fluturasi_angajati/fluturas_{persoana['cnp']}.json"
+                    if os.path.exists(cale_fluturas):
+                        exportare.actualizare_fluturas_fisier(persoana)
+                        print(f"Fluturasul a fost actualizat pentru fostul CNP-ul '{cnp}' in noul CNP : {cnp_nou} ")
+                    return
         print(f"Nu sa gasit nici un angajat cu CNP-ul: '{cnp}' ")
 
 
