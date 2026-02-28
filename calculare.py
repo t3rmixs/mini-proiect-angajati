@@ -51,17 +51,33 @@ def calcul_fluturas_salariu(angajati):
                 impozit = impozitare_baza * 0.10
                 net = brut - cas - cass - impozit
                 print(f"\nFluturas salarial pentru {persoana['nume']} {persoana['prenume']}")
-                print(f"Salariu Brut: {brut} RON")
-                print(f"CAS(10%): {cas} RON")
-                print(f"CASS(25%): {cass} RON")
-                print(f"Impozit(10%): {impozit} RON")
-                print(f"Salariu: {net} RON")
+                print(f"Salariu Brut: {brut:.2f} RON")
+                print(f"CAS(10%): {cas:.2f} RON")
+                print(f"CASS(25%): {cass:.2f} RON")
+                print(f"Impozit(10%): {impozit:.2f} RON")
+                print(f"Salariu: {net:.2f} RON")
                 # intreaba daca utilizatorul vrea sa exporteze fluturasul de salariu
-                raspuns = input("\nDoriti sa exportati acest fluturas in format JSON (da/nu): ").strip().lower()
-                if raspuns == "da":
-                    exportare.actualizare_fluturas_fisier(persoana)
-                    print(f"Fluturasul a fost salvat in folderul 'fluturasi_angajati' ")
+
+                while True:
+                    raspuns = input("\nDoriti sa exportati acest fluturas in format JSON (da/nu): ").strip().lower()
+                    if raspuns.isalpha() and raspuns == "da":
+                        exportare.actualizare_fluturas_fisier(persoana)
+                        print(f"Fluturasul a fost salvat in folderul 'fluturasi_angajati' ")
+                        break
+                    elif raspuns == "nu":
+                        print("Exportare a fost anulata!")
+                        break
+                    else:
+                        print("Eroare: Te rugam sa introduci doar (da/nu)")
                 return
+                            
+                # raspuns = input("\nDoriti sa exportati acest fluturas in format JSON (da/nu): ").strip().lower()
+                # if raspuns.isalpha() and raspuns == "da":
+                #     exportare.actualizare_fluturas_fisier(persoana)
+                #     print(f"Fluturasul a fost salvat in folderul 'fluturasi_angajati' ")
+                # else:
+                #     print("Export anulat sau raspuns invalid")
+                # return
             
             
         print(f"Nu am gasit nici un angajat cu CNP-ul {cnp} , inceacra din nou sau '0' pentru meniu")
