@@ -1,11 +1,11 @@
 {
     "Nume": "Alex",
     "Prenume": "Machanga",
-    "CNP": "3333333333331",
+    "cnp": "3333333333331",
     "Departament": "IT",
     "Salariu brut": 7777.0,
-    "Cas (25%)": 1944.25,
-    "Cass (10%)": 777.7,
-    "Impozit (10%)": 505.51,
-    "Salariu net": 4549.55
+    "Cas (10%)": 972.0,
+    "Cass (25%)": 389.0,
+    "Impozit (10%)": 253.0,
+    "Salariu net": 2275.0
 }

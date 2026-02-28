@@ -287,7 +287,7 @@ def afiseaza_dupa_senioritate(angajati):
     print("\n--> Angajati dupa senioritate")
     while True:
 
-        nivel = input(f"Ce nivel cauti (disponibile {validari.aceptare_nivel}) sau '0' pentru meniu: ").lower()
+        nivel = input(f"Ce nivel cauti, disponibile -> {validari.aceptare_nivel}  sau '0' pentru meniu: ").lower()
         if nivel == "0":
             return
         
@@ -301,7 +301,7 @@ def afiseaza_dupa_senioritate(angajati):
     for persoana in angajati:
         if persoana["senioritate"].lower() == nivel:
             print("-"*40)
-            print(f"\n Angajatul : {persoana['nume']} {persoana['prenume']} in departamentul - {persoana['departament']} - {persoana['senioritate']}")
+            print(f"\n Angajatul : {persoana['nume']} {persoana['prenume']} este '{persoana['senioritate']}' in departamentul '{persoana['departament']}' ")
             gasit = True
 
     if not gasit:
@@ -315,12 +315,12 @@ def afisare_dupa_departament(angajati):
 
     departamente_disponibile = set(persoana["departament"] for persoana in angajati)
 
-    departament_cautat = input(f"Introdu un departament (disponibile {departamente_disponibile}): ").strip().upper()
+    departament_cautat = input(f"Introdu un departament , disponibile -> {departamente_disponibile} : ").strip().upper()
     gasit = False
     for persoana in angajati:
         if persoana["departament"].upper() == departament_cautat:
-            print(f" {persoana['nume']} {persoana['prenume']} | {persoana['departament']} |{persoana['senioritate']}")
+            print(f" {persoana['nume']} {persoana['prenume']} | {persoana['departament']} | {persoana['senioritate']}")
             gasit = True
 
     if not gasit:
-        print(f"Nu exista angajati in departamentul {departament_cautat}")
+        print(f"Nu exista nici un angajat in departamentul '{departament_cautat}'")
