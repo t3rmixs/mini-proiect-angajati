@@ -1,4 +1,5 @@
 import validari
+import exportare
 
 
 def obtine_total_salarii(angajati):
@@ -55,6 +56,11 @@ def calcul_fluturas_salariu(angajati):
                 print(f"CASS(25%): {cass} RON")
                 print(f"Impozit(10%): {impozit} RON")
                 print(f"Salariu: {net} RON")
+                # intreaba daca utilizatorul vrea sa exporteze fluturasul de salariu
+                raspuns = input("\nDoriti sa exportati acest fluturas in format JSON (da/nu): ").strip().lower()
+                if raspuns == "da":
+                    exportare.actualizare_fluturas_fisier(persoana)
+                    print(f"Fluturasul a fost salvat in folderul 'fluturasi_angajati' ")
                 return
             
             
