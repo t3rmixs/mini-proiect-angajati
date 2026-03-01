@@ -46,6 +46,8 @@ def exporteaza_fluturas(angajati: list[dict]) -> None:
     """
     print("\n-- Export fluturasi de salar")
 
+    os.makedirs("fluturasi_angajati", exist_ok=True)
+
     while True:
         cnp: str = validari.cere_cnp_valid()
            
@@ -97,7 +99,6 @@ def actualizare_fluturas_fisier(persoana: dict) -> None:
     automat dupa:
     - Exportul manual al fluturasului
     - Modificarea datelor unui angajat (daca fisierul exista)
-    
     Calculele sunt identice cu cele din calcul_fluturas_salariu:
     - CAS: 25% din brut
     - CASS: 10% din brut
@@ -111,10 +112,12 @@ def actualizare_fluturas_fisier(persoana: dict) -> None:
         None: Functia scrie direct in fisierul JSON.
         
     Note:
-        - Folderul 'fluturasi_angajati' trebuie sa existe
+        - Creaza folderul (fluturasi_angajati) daca nu exista
         - Fisierul este suprascris complet de fiecare data
         - Nu se afiseaza mesaje de confirmare (este o functie interna)
     """
+    os.makedirs("fluturasi_angajati", exist_ok=True)
+    
     brut: float = float(persoana["salar"])
     cas: float = brut * 0.25
     cass: float = brut * 0.10
@@ -164,6 +167,7 @@ def afisare_fluturas_din_fisier() -> None:
         - Utilizatorul poate introduce '0' pentru a reveni la meniu
         - Daca fisierul nu exista, se afiseaza un mesaj de eroare
         - Toate campurile sunt afisate cu numele in uppercase
+        - Creaza folderul (fluturasi_angajati) daca nu exista
     """
     print(f"\n--> Afisare fluturas de salariu dintr-un fisier exportat")
 
