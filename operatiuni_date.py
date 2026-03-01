@@ -362,9 +362,9 @@ def sterge_angajat(angajati: list[dict]) -> None:
                         print(f"Operatiune oprita!")
                         break
                     else:
-                        print(f"Eroare: Intodu (da/nu) tu ai introdus '{confirmare}' Inceacra din nou sau apasa '0' pentru meniu")
+                        print(f"Eroare: Intodu (da/nu) tu ai introdus '{confirmare}' Incearca din nou sau apasa '0' pentru meniu")
         if not gasit:        
-            print(f"Nu sa gasit nici un angajat cu CNP-ul '{cnp}' \n")
+            print(f"Nu s-a gasit nici un angajat cu CNP-ul '{cnp}' \n")
 
 
 def afisare_toti_angajatii(angajati: list[dict]) -> None:

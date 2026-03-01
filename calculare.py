@@ -146,4 +146,4 @@ def calcul_fluturas_salariu(angajati: list[dict]) -> None:
                         print("Eroare: Te rugam sa introduci doar (da/nu)")
                 return
                              
-        print(f"Nu am gasit nici un angajat cu CNP-ul {cnp} , inceacra din nou sau '0' pentru meniu")
+        print(f"Nu am gasit nici un angajat cu CNP-ul {cnp} , incearca din nou sau '0' pentru meniu")

@@ -187,7 +187,7 @@ def afisare_fluturas_din_fisier() -> None:
         nume_fisier: str = (f"{folder}/fluturas_{cnp}.json")
 
         if not os.path.exists(nume_fisier):
-            print(f"Nu sa gasit nici un fluturas exportat pentru CNP-u: {cnp}")
+            print(f"Nu s-a gasit nici un fluturas exportat pentru CNP-u: {cnp}")
             return
         
         print("-" *30)

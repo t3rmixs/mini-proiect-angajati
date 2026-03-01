@@ -14,7 +14,6 @@ implementata in module separate pentru o mai buna organizare.
 import operatiuni_date
 import incarcare_salvare
 import calculare
-import incarcare_salvare
 import exportare
 
 def afisare_meniu() -> None:

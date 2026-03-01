@@ -60,7 +60,7 @@ def cere_cnp_valid() -> str:
         if cnp_validare(cnp):
             return cnp
         if not cnp.isdigit():
-            print(f"Eroare: CNP contine caracter nerpermise (litere/simboluri).")
+            print(f"Eroare: CNP contine caracter nepermise (litere/simboluri).")
             continue
         elif len(cnp) != 13:
             print(f"Eroare: Lungime incorecta. Trebuie 13 cifre (ai introdus {len(cnp)}).")
@@ -104,7 +104,7 @@ def validare_nume(text: str) -> bool:
             return False
         
     if len(text) < 3:
-        print(f"Eroare: '{text}' este prea scrut ( minim 3 litere). ")
+        print(f"Eroare: '{text}' este prea scurt ( minim 3 litere). ")
         return False
     
     return True
@@ -203,7 +203,7 @@ def departament_validare(departament: str) -> bool:
         Departamentele sunt stocate in format uppercase pentru consistenta.
     """
     if not departament.isalnum():
-        print(f"Departamentul nu poate contine charactere speciale , poate sa contina doar Litere/Cifre")
+        print(f"Departamentul nu poate contine caractere speciale , poate sa contina doar Litere/Cifre")
         return False
     if len(departament) < 2:
         print(f"Numele departamentului este prea scurt tu ai introdus '{len(departament)}' caracter  ")
