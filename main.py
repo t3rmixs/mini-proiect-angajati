@@ -15,6 +15,7 @@ import operatiuni_date
 import incarcare_salvare
 import calculare
 import exportare
+import stil
 
 def afisare_meniu() -> None:
     """
@@ -45,10 +46,9 @@ def afisare_meniu() -> None:
         - Liniile de separare (-) ajuta la lizibilitate
         - Numerotarea incepe de la 0 pentru consistenta cu input-ul
     """
-    print("-"*30)
-    print(" --> Gestioneaza compania ")
-    print("-"*30)
-    print("0. Iesire")  
+    #print("-"*30)
+    stil.titlu(" --> Gestioneaza compania ")
+    #print("-"*30) 
     print("1. Adauga angajat")
     print("2. Cautare angajat (dupa CNP)")
     print("3. Modificare angajat (dupa CNP)")
@@ -61,6 +61,7 @@ def afisare_meniu() -> None:
     print("10. Afisare angajati pe baza departamentului")
     print("11. Export fluturas salariu")
     print("12. Afisare fluturas din fisier")
+    print("13. Iesire")  
     print("-"*40)
 
 def main() -> None:
@@ -100,20 +101,20 @@ def main() -> None:
     
     while True:
         afisare_meniu()
-        alege: str = input("Alege o optiune de la 0-12: ").strip()
+        alege: str = input("Alege o optiune de la 1-13: ").strip()
         
         try:
             alege_numar: int = int(alege)
 
-            if alege_numar < 0 or alege_numar > 12:
-                print(f"Eroare: Numarul trebuie sa fie intre 1-12 , tu ai ales {alege_numar}")
+            if alege_numar < 1 or alege_numar > 13:
+                stil.eroare(f"Numarul trebuie sa fie intre 1-13 , ai introdus -> {stil.evidentiaza(alege_numar)}")
                 continue
         except ValueError:
-            print(f"Eroare: Trebuie sa introduceti un numar valid (ai introdus '{alege}')")
+            stil.eroare(f"Trebuie sa introduceti un numar valid , ai introdus -> {stil.evidentiaza(alege)}")
             continue
 
-        if alege == "0":
-            print(f"Program inchis, ai ales '{alege}' ")
+        if alege == "13":
+            stil.info(f"Program inchis, ai ales -> {stil.evidentiaza(alege)} ")
             break
         elif alege == "1":
             operatiuni_date.adaugare_angajat(lista_angajati)

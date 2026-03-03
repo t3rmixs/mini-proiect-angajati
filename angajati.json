@@ -52,5 +52,14 @@
         "salar": 4050.0,
         "departament": "MARKETING",
         "senioritate": "mid"
+    },
+    {
+        "cnp": "8787878787878",
+        "nume": "Asdas",
+        "prenume": "Dasd",
+        "varsta": 18,
+        "salar": 12354.0,
+        "departament": "A",
+        "senioritate": "junior"
     }
 ]

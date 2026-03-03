@@ -7,7 +7,7 @@ Acest modul este responsabil pentru:
 - Calcularea fluturasului de salariu (brut -> net)
 - Filtrarea si calcularea pe departamente
 """
-
+import stil
 import validari
 import exportare
 
@@ -67,8 +67,8 @@ def calcul_total_salarii_departament(angajati: list[dict]) -> None:
         - Totalul este calculat pe salariile brute
         - Departamentul este cautat dupa nume exact (dupa convertire la uppercase)
     """
-    print("\n--> Calcul total salarii departament ")
-    print("-"*30)
+    stil.titlu(" ---> Calcul total salarii departament ")
+
 
     departamente_disponibile: set = set(persoana["departament"] for persoana in angajati)
 
@@ -82,9 +82,9 @@ def calcul_total_salarii_departament(angajati: list[dict]) -> None:
             total += float(persoane["salar"])
             gasit = True
     if gasit:
-        print(f"Costul total pentru departamentul {cautare_departament} este de : {total} RON")
+        stil.succes(f"Costul total pentru departamentul {cautare_departament} este de : {total} RON")
     else:
-        print("Departament negasit !")
+        stil.info("Departament negasit!")
 
 
 def calcul_fluturas_salariu(angajati: list[dict]) -> None:
@@ -113,7 +113,7 @@ def calcul_fluturas_salariu(angajati: list[dict]) -> None:
         - Fisierul exportat poate fi vizualizat ulterior prin optiunea 12 din meniu
     """
     while True:
-        print("\n --> Calcul fluturasi salariu")
+        stil.titlu(" ---> Calcul fluturasi salariu")
         cnp: str = validari.cere_cnp_valid()
         if cnp == "0":
             return
@@ -125,25 +125,18 @@ def calcul_fluturas_salariu(angajati: list[dict]) -> None:
                 impozitare_baza: float = brut - cas - cass
                 impozit: float = impozitare_baza * 0.10
                 net: float = brut - cas - cass - impozit
-                print(f"\nFluturas salarial pentru {persoana['nume']} {persoana['prenume']}")
-                print(f"Salariu Brut: {brut:.2f} RON")
-                print(f"CAS(10%): {cas:.2f} RON")
-                print(f"CASS(25%): {cass:.2f} RON")
-                print(f"Impozit(10%): {impozit:.2f} RON")
-                print(f"Salariu: {net:.2f} RON")
-
-                # intreaba daca utilizatorul vrea sa exporteze fluturasul de salariu
+                stil.titlu(f"Fluturas salarial pentru {persoana['nume']} {persoana['prenume']}\n Salariu Brut: {brut:.2f} RON \n CAS(10%): {cas:.2f} RON \n CASS(25%): {cass:.2f} RON \n Impozit(10%): {impozit:.2f} RON \n Salariu: {net:.2f} RON")
                 while True:
                     raspuns: str = input("\nDoriti sa exportati acest fluturas in format JSON (da/nu): ").strip().lower()
                     if raspuns.isalpha() and raspuns == "da":
                         exportare.actualizare_fluturas_fisier(persoana)
-                        print(f"Fluturasul a fost salvat in folderul 'fluturasi_angajati' ")
+                        stil.succes(f"Fluturasul a fost salvat in folderul 'fluturasi_angajati' ")
                         break
                     elif raspuns == "nu":
-                        print("Exportare a fost anulata!")
+                        stil.info("Exportare a fost anulata!")
                         break
                     else:
-                        print("Eroare: Te rugam sa introduci doar (da/nu)")
+                        stil.atentionare("Te rugam sa introduci doar (da/nu)")
                 return
                              
-        print(f"Nu am gasit nici un angajat cu CNP-ul {cnp} , incearca din nou sau '0' pentru meniu")
+        stil.info(f"Nu am gasit nici un angajat cu CNP-ul {cnp} , incearca din nou sau '0' pentru meniu")

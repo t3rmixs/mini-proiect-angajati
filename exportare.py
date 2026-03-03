@@ -11,6 +11,7 @@ Acest modul permite:
 import os
 import validari
 import json
+import stil
 
 def exporteaza_fluturas(angajati: list[dict]) -> None:
     """
@@ -44,7 +45,7 @@ def exporteaza_fluturas(angajati: list[dict]) -> None:
         - Fisierul este suprascris daca deja exista pentru acel CNP
         - Datele numerice sunt rotunjite la 2 zecimale
     """
-    print("\n-- Export fluturasi de salar")
+    stil.titlu(" ---> Export fluturasi de salar")
 
     os.makedirs("fluturasi_angajati", exist_ok=True)
 
@@ -83,11 +84,11 @@ def exporteaza_fluturas(angajati: list[dict]) -> None:
                 with open(nume_fisier, "w") as my_file:
                     json.dump(date_fluturas, my_file ,indent=4)
                 
-                print(f"Fisierul JSON pentru angajatul cu CNP-ul {cnp} a fost creat in {nume_fisier}")
+                stil.succes(f"Fisierul JSON pentru angajatul cu CNP-ul {cnp} a fost creat in {stil.evidentaza(nume_fisier)}")
                 return
             
         if not gasit :
-            print(f"Nu s-a gasit nici un angajat cu CNP-ul {cnp}")
+            stil.info(f"Nu s-a gasit nici un angajat cu CNP-ul -> {stil.evidentiaza(cnp)}")
 
 
 def actualizare_fluturas_fisier(persoana: dict) -> None:
@@ -169,12 +170,12 @@ def afisare_fluturas_din_fisier() -> None:
         - Toate campurile sunt afisate cu numele in uppercase
         - Creaza folderul (fluturasi_angajati) daca nu exista
     """
-    print(f"\n--> Afisare fluturas de salariu dintr-un fisier exportat")
+    stil.titlu(f" ---> Afisare fluturas de salariu dintr-un fisier exportat")
 
     folder: str = "fluturasi_angajati"
 
     if not os.path.exists(folder):
-        print("Nu exista fisiere exportate!")
+        stil.info("Nu exista fisiere exportate!")
         return
 
     while True:
@@ -187,18 +188,16 @@ def afisare_fluturas_din_fisier() -> None:
         nume_fisier: str = (f"{folder}/fluturas_{cnp}.json")
 
         if not os.path.exists(nume_fisier):
-            print(f"Nu s-a gasit nici un fluturas exportat pentru CNP-u: {cnp}")
+            stil.info(f"Nu s-a gasit nici un fluturas exportat pentru CNP-u: {stil.evidentiaza(cnp)}")
             return
         
-        print("-" *30)
-        print(f" Fluturas salariu din fisierul {nume_fisier}")
-        print("-" *30)
+        stil.titlu(f" ---> Fluturas salariu din fisierul {nume_fisier}")
 
         with open(nume_fisier, "r" ) as fluturasi_salariu:
 
             date: dict = json.load(fluturasi_salariu)
 
             for camp, valoare in date.items():
-                print(f"{camp.upper()}: {valoare}")
+                stil.info(f"{camp.upper()}: {valoare}")
 
         return

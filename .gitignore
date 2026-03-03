@@ -1,0 +1,8 @@
+# Ignora folderele de cache generate de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignora datele locale sau fisierele de sistem
+.DS_Store
+Thumbs.db

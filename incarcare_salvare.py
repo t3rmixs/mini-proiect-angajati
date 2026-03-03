@@ -7,6 +7,7 @@ Acest modul asigura persistenta datelor intre sesiuni ale aplicatiei.
 
 import os
 import json
+import stil
 
 nume_fisier = "angajati.json"
 
@@ -41,7 +42,7 @@ def incarca_fisier_angajati() -> list[dict]:
             date: list[dict] = json.load(my_file)
             return date
     except (json.JSONDecodeError, IOError) as erroare_incarcare:
-        print(f"Ai o mica eroare la citirea fisierului : {erroare_incarcare}")
+        stil.eroare(f"Ai o mica eroare la citirea fisierului : {erroare_incarcare}")
         return []
 
 
@@ -75,7 +76,7 @@ def salveaza_fisier_angajati(angajati: list[dict]) -> bool:
             json.dump(angajati, my_file, indent=4)
         return True
     except IOError as error_save:
-        print(f"Ai o mica eroare la salvarea fisierului : {error_save}")
+        stil.eroare(f"Ai o mica eroare la salvarea fisierului : {error_save}")
         return False
     
 

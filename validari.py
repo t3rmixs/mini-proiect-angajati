@@ -4,7 +4,7 @@ Modulul validari contine toate functiile necesare pentru validarea datelor intro
 Aceste functii asigură ca datele introduse (CNP, nume, varsta, salariu, etc.) respecta formatul corect
 inainte de a fi procesate sau salvate in sistem.
 """
-
+import stil
 salariu_minim: int = 4050
 aceptare_nivel: list[str] = ["junior","mid","senior"]
 
@@ -60,10 +60,10 @@ def cere_cnp_valid() -> str:
         if cnp_validare(cnp):
             return cnp
         if not cnp.isdigit():
-            print(f"Eroare: CNP contine caracter nepermise (litere/simboluri).")
+            stil.eroare(f" CNP contine caracter nepermise (litere/simboluri).")
             continue
         elif len(cnp) != 13:
-            print(f"Eroare: Lungime incorecta. Trebuie 13 cifre (ai introdus {len(cnp)}).")
+            stil.eroare(f" Lungime incorecta. Trebuie 13 cifre , ai introdus -> {stil.evidentiaza(len(cnp))})")
             continue
         return cnp
 
@@ -100,11 +100,11 @@ def validare_nume(text: str) -> bool:
    
     for caractere in text:
         if not (caractere.isalpha() or caractere == " " or caractere == "-"):
-            print(f"Eroare: '{text}' contine carcatere nepermise (cifre sau simboluri)")
+            stil.eroare(f"Textul contine carcatere nepermise (cifre sau simboluri) , ai introdus -> {stil.evidentiaza(text)}")
             return False
         
     if len(text) < 3:
-        print(f"Eroare: '{text}' este prea scurt ( minim 3 litere). ")
+        stil.atentionare(f"Textul este prea scurt ( minim 3 litere). {stil.evidentiaza(text)} ")
         return False
     
     return True
@@ -137,9 +137,9 @@ def varsta_validare(varsta: str) -> bool:
         if varsta >= 18:
             return True
         else:
-            print(f"Varsta trebuie sa fie peste 18 ani (ai introdus {varsta})")
+            stil.atentionare(f"Varsta trebuie sa fie peste 18 ani , ai introdus -> {stil.evidentiaza(varsta)}")
     except ValueError as erroare:
-        print(f"Varsta trebuie sa fie un numar valid (detaliu {erroare})")
+        stil.eroare(f"Varsta trebuie sa fie un numar valid , detalii -> {stil.evidentiaza(erroare)})")
         return False
     
 
@@ -173,10 +173,10 @@ def salariu_validare(salar: str) -> bool:
         if valoare >= salariu_minim:
             return True
         else:
-            print(f" Salariul trebuie sa fie mai mare de {salariu_minim} RON! (ai introdus {valoare}) ")
+            stil.eroare(f" Salariul trebuie sa fie mai mare de {salariu_minim} RON! ai introdus -> {stil.evidentiaza(valoare)} ")
             return False 
     except ValueError as erroare:
-        print(f"Salariu trebuie sa fie un numar valid!(detaliu: {erroare})")
+        stil.eroare(f" Salariu trebuie sa fie un numar valid! Detalii: {stil.evidentiaza(erroare)})")
         return False
     
 def departament_validare(departament: str) -> bool:
@@ -202,14 +202,13 @@ def departament_validare(departament: str) -> bool:
     Note:
         Departamentele sunt stocate in format uppercase pentru consistenta.
     """
-    if not departament.isalnum():
-        print(f"Departamentul nu poate contine caractere speciale , poate sa contina doar Litere/Cifre")
-        return False
     if len(departament) < 2:
-        print(f"Numele departamentului este prea scurt tu ai introdus '{len(departament)}' caracter  ")
+        stil.atentionare(f" Numele departamentului este prea scurt tu ai introdus {stil.evidentiaza(len(departament))} {stil.GALBEN}{stil.BOLD} caracter {stil.RESET} ")
+        return False    
+    if not departament.isalnum():
+        stil.eroare(f" Departamentul nu poate contine caractere speciale , poate sa contina doar Litere/Cifre")
         return False
 
-    
     return True
 
 def senior_validare(senioritate: str) -> bool:
