@@ -71,20 +71,31 @@ def calcul_total_salarii_departament(angajati: list[dict]) -> None:
 
 
     departamente_disponibile: set = set(persoana["departament"] for persoana in angajati)
+    while True:
 
-    cautare_departament: str = input(f"Introduceti un departament -> disponibile {departamente_disponibile}: ").strip().upper()
+        cautare_departament: str = input(f"Introdu un departament disponibil {stil.GALBEN}{departamente_disponibile}{stil.RESET} sau {stil.GALBEN}'0'{stil.RESET} pentru meniu:  ").strip().upper()
 
-    total: float = 0
-    gasit: bool = False
+        if cautare_departament == "0":
+            return
+        
+        if not validari.departament_validare(cautare_departament):
+            continue
+        if cautare_departament not in departamente_disponibile:
+            stil.atentionare(f"Nu exista nici un departament cu numele -> {stil.evidentiaza(cautare_departament)}")
+            continue
 
-    for persoane in angajati:
-        if persoane["departament"].upper() == cautare_departament:
-            total += float(persoane["salar"])
-            gasit = True
-    if gasit:
-        stil.succes(f"Costul total pentru departamentul {cautare_departament} este de : {total} RON")
-    else:
-        stil.info("Departament negasit!")
+        total: float = 0
+        gasit: bool = False
+
+        for persoane in angajati:
+            if persoane["departament"].upper() == cautare_departament:
+                total += float(persoane["salar"])
+                gasit = True
+        if gasit:
+            stil.succes(f"Costul total pentru departamentul {cautare_departament} este de : {total} RON")
+            return
+        else:
+            stil.info("Departament negasit!")
 
 
 def calcul_fluturas_salariu(angajati: list[dict]) -> None:
@@ -125,9 +136,10 @@ def calcul_fluturas_salariu(angajati: list[dict]) -> None:
                 impozitare_baza: float = brut - cas - cass
                 impozit: float = impozitare_baza * 0.10
                 net: float = brut - cas - cass - impozit
+                print("")
                 stil.titlu(f"Fluturas salarial pentru {persoana['nume']} {persoana['prenume']}\n Salariu Brut: {brut:.2f} RON \n CAS(10%): {cas:.2f} RON \n CASS(25%): {cass:.2f} RON \n Impozit(10%): {impozit:.2f} RON \n Salariu: {net:.2f} RON")
                 while True:
-                    raspuns: str = input("\nDoriti sa exportati acest fluturas in format JSON (da/nu): ").strip().lower()
+                    raspuns: str = input(f"\nDoriti sa exportati acest fluturas in format JSON {stil.GALBEN}(da/nu){stil.RESET}: ").strip().lower()
                     if raspuns.isalpha() and raspuns == "da":
                         exportare.actualizare_fluturas_fisier(persoana)
                         stil.succes(f"Fluturasul a fost salvat in folderul 'fluturasi_angajati' ")
@@ -139,4 +151,4 @@ def calcul_fluturas_salariu(angajati: list[dict]) -> None:
                         stil.atentionare("Te rugam sa introduci doar (da/nu)")
                 return
                              
-        stil.info(f"Nu am gasit nici un angajat cu CNP-ul {cnp} , incearca din nou sau '0' pentru meniu")
+        stil.info(f"Nu am gasit nici un angajat cu CNP-ul {cnp} , incearca din nou sau {stil.GALBEN}'0'{stil.RESET} {stil.CYAN}pentru meniu{stil.RESET}")

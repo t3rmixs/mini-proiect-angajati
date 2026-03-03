@@ -8,30 +8,43 @@ import stil
 salariu_minim: int = 4050
 aceptare_nivel: list[str] = ["junior","mid","senior"]
 
-
 def cnp_validare(cnp: str) -> bool:
     """
-    Verifica daca un CNP introdus are formatul corect.
-    
-    Un CNP valid trebuie sa indeplineasca urmatoarele conditii:
-    - Sa contina exact 13 caractere
-    - Toate caracterele trebuie sa fie cifre (0-9)
-    
-    Aceasta functie nu verifica validitatea reala a CNP-ului (algoritmul de control),
-    ci doar formatul de baza.
-    
-    Exemple:
-        "1234567890123" -> True (13 cifre)
-        "123456789012"  -> False (12 cifre)
-        "123456789012A" -> False (contine litere)
-    
-    Args:
-        cnp (str): Sirul de caractere care reprezinta CNP-ul de validat.
-        
-    Returns:
-        bool: True daca CNP-ul are format valid (13 cifre), False in caz contrar.
+    Verifica daca un CNP introdus are formatul corect si afiseaza erori specifice.
     """
-    return len(cnp) == 13 and cnp.isdigit()
+    if not cnp.isdigit():
+        stil.eroare("CNP-ul contine caractere nepermise (litere/simboluri).")
+        return False
+    
+    if len(cnp) != 13:
+        stil.eroare(f"Lungime incorecta. Trebuie 13 cifre, ai introdus -> {stil.evidentiaza(len(cnp))}")
+        return False
+    
+    return True
+
+# def cnp_validare(cnp: str) -> bool:
+#     """
+#     Verifica daca un CNP introdus are formatul corect.
+    
+#     Un CNP valid trebuie sa indeplineasca urmatoarele conditii:
+#     - Sa contina exact 13 caractere
+#     - Toate caracterele trebuie sa fie cifre (0-9)
+    
+#     Aceasta functie nu verifica validitatea reala a CNP-ului (algoritmul de control),
+#     ci doar formatul de baza.
+    
+#     Exemple:
+#         "1234567890123" -> True (13 cifre)
+#         "123456789012"  -> False (12 cifre)
+#         "123456789012A" -> False (contine litere)
+    
+#     Args:
+#         cnp (str): Sirul de caractere care reprezinta CNP-ul de validat.
+        
+#     Returns:
+#         bool: True daca CNP-ul are format valid (13 cifre), False in caz contrar.
+#     """
+#     return len(cnp) == 13 and cnp.isdigit()
 
 def cere_cnp_valid() -> str:
     """
@@ -52,20 +65,28 @@ def cere_cnp_valid() -> str:
         sau alege sa iasa. Este o functie de tip 'input loop'.
     """
     while True:
-        cnp: str = input("Introduceti CNP-ul (13 cifre) sau '0' pentru meniu: ").strip()
+        cnp: str = input(f"Introduceti CNP-ul sau {stil.GALBEN}'0'{stil.RESET} pentru meniu: ").strip()
 
         if cnp == "0":
             return "0"
         
         if cnp_validare(cnp):
             return cnp
-        if not cnp.isdigit():
-            stil.eroare(f" CNP contine caracter nepermise (litere/simboluri).")
-            continue
-        elif len(cnp) != 13:
-            stil.eroare(f" Lungime incorecta. Trebuie 13 cifre , ai introdus -> {stil.evidentiaza(len(cnp))})")
-            continue
-        return cnp
+    # while True:
+    #     cnp: str = input(f"Introduceti CNP-ul sau {stil.GALBEN}'0'{stil.RESET} pentru meniu: ").strip()
+
+    #     if cnp == "0":
+    #         return "0"
+        
+    #     if cnp_validare(cnp):
+    #         return cnp
+    #     if not cnp.isdigit():
+    #         stil.eroare(f" CNP contine caracter nepermise (litere/simboluri).")
+    #         continue
+    #     elif len(cnp) != 13:
+    #         stil.eroare(f" Lungime incorecta. Trebuie 13 cifre , ai introdus -> {stil.evidentiaza(len(cnp))})")
+    #         continue
+    #     return cnp
 
 
 def validare_nume(text: str) -> bool:
@@ -139,7 +160,7 @@ def varsta_validare(varsta: str) -> bool:
         else:
             stil.atentionare(f"Varsta trebuie sa fie peste 18 ani , ai introdus -> {stil.evidentiaza(varsta)}")
     except ValueError as erroare:
-        stil.eroare(f"Varsta trebuie sa fie un numar valid , detalii -> {stil.evidentiaza(erroare)})")
+        stil.eroare(f"Varsta trebuie sa fie un numar valid , detalii -> {stil.evidentiaza(erroare)}")
         return False
     
 

@@ -9,22 +9,13 @@
         "senioritate": "mid"
     },
     {
-        "cnp": "2222222222222",
-        "nume": "cristi",
-        "prenume": "bobescu",
-        "varsta": 20,
-        "salar": 4051,
-        "departament": "HR",
-        "senioritate": "senior"
-    },
-    {
         "cnp": "3333333333331",
         "nume": "Alex",
         "prenume": "Machanga",
         "varsta": 18,
         "salar": 7777.0,
         "departament": "IT",
-        "senioritate": "junior"
+        "senioritate": "senior"
     },
     {
         "cnp": "7777777777711",
@@ -45,12 +36,12 @@
         "senioritate": "mid"
     },
     {
-        "cnp": "9999999999990",
-        "nume": "Paul",
-        "prenume": "Margeru",
+        "cnp": "4444444444444",
+        "nume": "Ana",
+        "prenume": "Bolca",
         "varsta": 18,
-        "salar": 4050.0,
-        "departament": "MARKETING",
+        "salar": 9999.0,
+        "departament": "IT",
         "senioritate": "mid"
     },
     {
@@ -60,6 +51,24 @@
         "varsta": 18,
         "salar": 12354.0,
         "departament": "A",
-        "senioritate": "junior"
+        "senioritate": "mid"
+    },
+    {
+        "cnp": "8797897897891",
+        "nume": "Asd",
+        "prenume": "Sad",
+        "varsta": 19,
+        "salar": 4555.0,
+        "departament": "DSA",
+        "senioritate": "mid"
+    },
+    {
+        "cnp": "1234567891234",
+        "nume": "Test",
+        "prenume": "Terry",
+        "varsta": 18,
+        "salar": 4050.0,
+        "departament": "22",
+        "senioritate": "senior"
     }
 ]

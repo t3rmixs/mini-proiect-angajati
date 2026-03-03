@@ -1,0 +1,11 @@
+{
+    "Nume": "Ana",
+    "Prenume": "Bolca",
+    "cnp": "4444444444444",
+    "Departament": "IT",
+    "Salariu brut": 9999.0,
+    "Cas (10%)": 1250.0,
+    "Cass (25%)": 500.0,
+    "Impozit (10%)": 325.0,
+    "Salariu net": 2924.5
+}

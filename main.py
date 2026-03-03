@@ -47,7 +47,7 @@ def afisare_meniu() -> None:
         - Numerotarea incepe de la 0 pentru consistenta cu input-ul
     """
     #print("-"*30)
-    stil.titlu(" --> Gestioneaza compania ")
+    stil.titlu(" ---> Gestioneaza compania ")
     #print("-"*30) 
     print("1. Adauga angajat")
     print("2. Cautare angajat (dupa CNP)")
@@ -101,7 +101,7 @@ def main() -> None:
     
     while True:
         afisare_meniu()
-        alege: str = input("Alege o optiune de la 1-13: ").strip()
+        alege: str = input(f"Alege o optiune de la {stil.GALBEN}1-13{stil.RESET}: ").strip()
         
         try:
             alege_numar: int = int(alege)

@@ -24,7 +24,7 @@ def titlu(mesaj: str):
 
 def info(mesaj: str):
     """Afiseaza informatii de sistem sau ghidaj cu cyan."""
-    print(f"{CYAN}>>> {mesaj}{RESET}")
+    print(f"{CYAN}{BOLD}>>> {mesaj}{RESET}")
 
 def evidentiaza(text) -> str:
     """Returneaza textul colorat cu albastru pentru a fi folosit in interiorul unui print."""

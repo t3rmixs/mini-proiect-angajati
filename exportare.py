@@ -84,7 +84,7 @@ def exporteaza_fluturas(angajati: list[dict]) -> None:
                 with open(nume_fisier, "w") as my_file:
                     json.dump(date_fluturas, my_file ,indent=4)
                 
-                stil.succes(f"Fisierul JSON pentru angajatul cu CNP-ul {cnp} a fost creat in {stil.evidentaza(nume_fisier)}")
+                stil.succes(f"Fisierul JSON pentru angajatul cu CNP-ul {cnp} a fost creat in {stil.evidentiaza(nume_fisier)}")
                 return
             
         if not gasit :

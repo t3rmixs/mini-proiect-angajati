@@ -65,28 +65,28 @@ def adaugare_angajat(angajati: list[dict]) -> None:
             break
 
     while True:
-        varsta: str = input("Varsta necsara >18: ")
+        varsta: str = input(f"Varsta necsara {stil.GALBEN}> 18{stil.RESET}: ")
         if validari.varsta_validare(varsta):
             break
         #stil.eroare("Varsta trebuie sa fie numerica si > 18 ani.")
 
     while True:
-        salar: str = input("Salariu Brut (minim 4050): ")
+        salar: str = input(f"Salariu Brut {stil.GALBEN}'minim 4050'{stil.RESET}: ")
         if validari.salariu_validare(salar):
             break
-        stil.eroare(f"Salariu trebuie sa fie mai mare de {validari.salariu_minim} RON.")
+        #stil.eroare(f"Salariu trebuie sa fie mai mare de {validari.salariu_minim} RON.")
     
     while True: 
         departamente_disponibile: set = set(persoana["departament"] for persoana in angajati)
-        departament: str = input(f"Departament (disponibile {departamente_disponibile} ) sau creaza unul nou: ").strip().upper()
+        departament: str = input(f"Departamente disponibile {stil.GALBEN}{departamente_disponibile}{stil.RESET} sau creaza unul nou: ").strip().upper()
         if validari.departament_validare(departament):
             break
 
     while True:
-        senioritate: str = input(f"Senerioaritate (acceptate {validari.aceptare_nivel}): ").lower()
+        senioritate: str = input(f"Senerioaritati acceptate {stil.GALBEN}{validari.aceptare_nivel}{stil.RESET}: ").lower()
         if validari.senior_validare(senioritate):
             break
-        stil.eroare(f"Senioritatea trebuie sa fie (disponibile {validari.aceptare_nivel}) .")
+        stil.eroare(f"Senioritatea trebuie sa fie una din cele disponibile {stil.GALBEN}{validari.aceptare_nivel}{stil.RESET}.")
 
     angajat_nou: dict = {
         "cnp": cnp,
@@ -101,7 +101,7 @@ def adaugare_angajat(angajati: list[dict]) -> None:
     
     if incarcare_salvare.salveaza_fisier_angajati(angajati):
         print("-"*30)
-        stil.succes(f"Angajatul {angajat_nou['nume']} {angajat_nou['prenume']} a fost adaugat cu success!")
+        stil.succes(f"Angajatul ' {angajat_nou['nume']} {angajat_nou['prenume']} ' a fost adaugat cu success!")
     else: 
         stil.eroare("Nu s-a putut salva !")
 
@@ -141,16 +141,20 @@ def cautare_angajat(angajati: list[dict]) -> None:
         gasit: bool = False
         for persoana in angajati: 
             if persoana["cnp"] == cnp:
-                print(f"\nDate gasite pentru : '{persoana['nume']} {persoana['prenume']}'")
-                print(f"CNP: {persoana['cnp']}")
-                print(f"Varsta: {persoana['varsta']}")
-                print(f"Salariu: {persoana['salar']} RON")
-                print(f"Departament: {persoana['departament']}")
-                print(f"Senioritate: {persoana['senioritate']}")
+                print("")
+                stil.titlu(f"Date gasite pentru : {persoana['nume']} {persoana['prenume']} \n CNP: {persoana['cnp']}\n Varsta: {persoana['varsta']} \n Salariu: {persoana['salar']} RON \n Departament: {persoana['departament']} \n Senioritate: {persoana['senioritate']}")
+                print("")
+                # print(f"CNP: {persoana['cnp']}")
+                # print(f"Varsta: {persoana['varsta']}")
+                # print(f"Salariu: {persoana['salar']} RON")
+                # print(f"Departament: {persoana['departament']}")
+                # print(f"Senioritate: {persoana['senioritate']}")
+
+
                 gasit = True
                 return
         if not gasit:
-            stil.eroare(f"CNP-ul {cnp} nu a fost gasit!")
+            stil.atentionare(f"CNP-ul {cnp} nu a fost gasit!")
     
 
 def modificare_angajat(angajati: list[dict]) -> None:
@@ -193,22 +197,30 @@ def modificare_angajat(angajati: list[dict]) -> None:
         for persoana in angajati:
             if persoana["cnp"] == cnp:
 
-                stil.info(f"\n ---> Mofica datele pentru '{persoana['nume']} {persoana['prenume']}'")
+                stil.titlu(f" ---> Mofica datele pentru '{persoana['nume']} {persoana['prenume']}'")
 
                 cnp_vechi: str = persoana["cnp"]
-                cnp_nou: str = input("Introdu un cnp nou sau apasa 'enter' pentru a-l pastra: ").strip()
+                cnp_nou: str = input(f"Introdu un cnp nou sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip()
 
                 if cnp_nou:
-                    while not validari.cnp_validare(cnp_nou):
-                        cnp_nou = input("Introdu un cnp nou valid sau apasa 'enter' pentru a-l pastra: ").strip()
-                        if not cnp_nou:
-                            break
-                    if cnp_nou:
+                    while True:
+                        if not validari.cnp_validare(cnp_nou):
+                            cnp_nou = input(f"Introdu un cnp nou valid sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip()
+                            if not cnp_nou:
+                                break
+                            continue
+
                         toate_cnpuriile: list = [persoana["cnp"] for persoana in angajati]
+
                         if cnp_nou in toate_cnpuriile:
                             stil.eroare(f"CNP-ul '{cnp_nou}' apartine deja a altui angajat! ")
+                            cnp_nou = input(f"Introdu un cnp nou valid sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip()
+                            if not cnp_nou:
+                                break
+                            continue
                         else:
                             persoana["cnp"] = cnp_nou
+                            stil.succes(f"CNP-ul a fost actualizat cu succes: {cnp_nou}")
 
                             cale_veche: str = f"fluturasi_angajati/fluturas_{cnp_vechi}.json"
                             cale_noua: str = f"fluturasi_angajati/fluturas_{cnp_nou}.json"
@@ -224,78 +236,80 @@ def modificare_angajat(angajati: list[dict]) -> None:
 
                                 os.remove(cale_veche)
                                 stil.info(f" Fisierul fluturas a fost redenumit din '{cnp_vechi}' in '{cnp_nou}' ")
+                            break
 
-
-                nume_nou: str = input("Introdu un nume nou sau apasa 'enter' pentru a-l pastra: ").strip().title()
+                nume_nou: str = input(f"Introdu un nume nou sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip().title()
                 if nume_nou:
                     while not validari.validare_nume(nume_nou):
-                        nume_nou = input("Introdu un nume nou valid sau apasa 'enter' pentru a-l pastra: ").strip().title()
+                        nume_nou = input(f"Introdu un nume nou valid sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip().title()
                         if not nume_nou:
                             break
                     if nume_nou:
                         persoana["nume"] = nume_nou.title()
+                        stil.succes(f"Numele a fost actualizat in: {nume_nou}")
 
-
-                prenume_nou: str = input("Introdu un prenume nou sau apasa 'enter' pentru a-l pastra: ").strip().title()
+                prenume_nou: str = input(f"Introdu un prenume nou sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip().title()
                 if prenume_nou:
                     while not validari.validare_nume(prenume_nou):
-                        prenume_nou = input("Introdu un prenume nou valid sau apasa 'enter' pentru a-l pastra: ").strip().title()
+                        prenume_nou = input(f"Introdu un prenume nou valid sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip().title()
                         if not prenume_nou:
                             break
                     if prenume_nou:
                         persoana["prenume"] = prenume_nou.title()
+                        stil.succes(f"Prenumele a fost actualizat in: {prenume_nou}")
 
 
-                varsta_noua: str = input("Introdu o varsta noua sau apasa 'enter' pentru a-l pastra: ")
+                varsta_noua: str = input(f"Introdu o varsta noua sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ")
                 if varsta_noua:
                     while not validari.varsta_validare(varsta_noua):
-                        varsta_noua = input("Introdu o varsta noua sau apasa 'enter' pentru a-l pastra: ")
+                        varsta_noua = input(f"Introdu o varsta noua sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ")
                         if not varsta_noua:
                             break
                     if varsta_noua:
                         persoana["varsta"] = int(varsta_noua)
+                        stil.succes(f"Varsta a fost actualizat in: {varsta_noua}")
                 
-                salariu_nou: str = input(f"Introdu un salariu nou (minim {validari.salariu_minim}) sau apasa 'enter' pentru a-l pastra: ")
+                salariu_nou: str = input(f"Introdu un salariu nou ({stil.GALBEN} minim {validari.salariu_minim}{stil.RESET}) sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ")
                 if salariu_nou:
                     while not validari.salariu_validare(salariu_nou):
-                        salariu_nou = input(f"Introdu un salariu nou (minim {validari.salariu_minim}) sau apasa 'enter' pentru a-l pastra: ")
+                        salariu_nou = input(f"Introdu un salariu nou ({stil.GALBEN}minim {validari.salariu_minim}{stil.RESET}) sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ")
                         if not salariu_nou:
                             break
                     if salariu_nou:
                         persoana["salar"] = float(salariu_nou)
-                
+                        stil.succes(f"Salariul a fost actualizat in: {salariu_nou}")
 
                 departamente_disponibile: set = set(persoana["departament"] for persoana in angajati)
-
-                departament_nou: str = input(f"Introdu un departament nou (disponibile {departamente_disponibile}) sau creaza unu nou: ").strip().upper()
+                departament_nou: str = input(f"Introdu un departament nou, disponibile -> {stil.GALBEN}{departamente_disponibile}{stil.RESET} sau creaza unu nou: ").strip().upper()
                 if departament_nou:
                     while not validari.departament_validare(departament_nou):
-                        departament_nou = input(f"Introdu un departament nou (disponibile {departamente_disponibile}) sau creaza unu nou: ").strip().upper()
+                        departament_nou = input(f"Introdu un departament nou, disponibile -> {stil.GALBEN}{departamente_disponibile}{stil.RESET} sau creaza unu nou: ").strip().upper()
                         if not departament_nou:
                             break
                     if departament_nou:
                         persoana["departament"] = departament_nou
+                        stil.succes(f"Departamentul a fost actualizat in: {departament_nou}")
                 
-                senioritate_noua: str = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) sau apasa 'enter' pentru a-l pastra: ").strip().lower()
+                senioritate_noua: str = input(f"Introdu o senioritate noua, disponibile -> {stil.GALBEN}{validari.aceptare_nivel}{stil.RESET} sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip().lower()
                 if senioritate_noua:
                     while not validari.senior_validare(senioritate_noua):
-                        senioritate_noua = input(f"Introdu o senioritate noua (disponibile {validari.aceptare_nivel}) sau apasa 'enter' pentru a-l pastra : ").strip().lower()
+                        stil.eroare(f"Nivel invalid! Nivele disponibile -> {stil.GALBEN}{validari.aceptare_nivel}{stil.RESET}")
+                        senioritate_noua = input(f"Introdu o senioritate din, disponibile -> {stil.GALBEN}{validari.aceptare_nivel}{stil.RESET} sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra : ").strip().lower()
                         if not senioritate_noua:
                             break
                     if senioritate_noua:
                         persoana["senioritate"] = senioritate_noua
+                        stil.succes(f"Senioritatea a fost actualizat in: {senioritate_noua}")
 
                 if incarcare_salvare.salveaza_fisier_angajati(angajati):
-                    #print("-"*30)
                     stil.succes(f"Datele pentru angajatul '{persoana['nume']} {persoana['prenume']}' au fost salvate cu success!")
-            
                     #incearca sa salvezi in fluturas daca exista 
                     cale_fluturas: str = f"fluturasi_angajati/fluturas_{persoana['cnp']}.json"
                     if os.path.exists(cale_fluturas):
                         exportare.actualizare_fluturas_fisier(persoana)
                         stil.succes(f"Fluturasul a fost actualizat pentru fostul CNP-ul '{cnp}' in noul CNP : {cnp_nou} ")
                     return
-        stil.eroare(f"Nu s-a gasit nici un angajat cu CNP-ul: '{cnp}' ")
+        stil.atentionare(f"Nu s-a gasit nici un angajat cu CNP-ul: '{cnp}' ")
 
 
 def sterge_angajat(angajati: list[dict]) -> None:
@@ -340,23 +354,21 @@ def sterge_angajat(angajati: list[dict]) -> None:
                 gasit = True
 
                 while True:
-                    confirmare: str = input(f"Sigur doriti sa stergeti angajatul '{angajat['nume']} {angajat['prenume']}' (da/nu): ").strip().lower()
+                    confirmare: str = input(f"Sigur doriti sa stergeti angajatul '{angajat['nume']} {angajat['prenume']}' {stil.GALBEN}(da/nu){stil.RESET}: ").strip().lower()
                     if confirmare.lower() == "da":
 
                         fluturas_fisier: str = f"fluturasi_angajati/fluturas_{cnp}.json"
 
                         if os.path.exists(fluturas_fisier):
-                            sterge_fluturas: str = input("Fluturas gasit , vrei sa stergi acest fisier? (da/nu): ").strip().lower()
+                            sterge_fluturas: str = input(f"Fluturas gasit , vrei sa stergi acest fisier? {stil.GALBEN}(da/nu){stil.RESET}: ").strip().lower()
                             if sterge_fluturas == "da":
                                 os.remove(fluturas_fisier)
-                                #print("-"*30)
                                 stil.succes(f"Fluturasul pentru '{angajat['nume']} {angajat['prenume']}' cu CNP-ul {angajat['cnp']} a fost sters.")
                             else:
-                                stil.info(f"Fisierul a ramas inca pe disk tu ai ales {sterge_fluturas}")
+                                stil.info(f"Fisierul a ramas inca pe disk tu ai ales -> {stil.evidentiaza.sterge_fluturas}")
 
                         angajati.pop(index)
                         if incarcare_salvare.salveaza_fisier_angajati(angajati):
-                            #print("-"*30)
                             stil.succes(f"Angajatul '{angajat['nume']} {angajat['prenume']}' sters cu success!")
                         else:
                             stil.eroare("Eroare la salvare!")
@@ -365,9 +377,9 @@ def sterge_angajat(angajati: list[dict]) -> None:
                         stil.info(f"Operatiune oprita!")
                         break
                     else:
-                        stil.eroare(f"Introdu (da/nu) tu ai introdus '{confirmare}' Incearca din nou sau apasa '0' pentru meniu")
+                        stil.eroare(f"Raspuns inalid, ai introdus '{stil.ALBASTRU}{confirmare}{stil.RESET}{stil.ROSU}' Incearca din nou sau{stil.RESET} {stil.GALBEN}'0'{stil.RESET} {stil.ROSU}pentru meniu{stil.RESET}")
         if not gasit:        
-            stil.eroare(f"Nu s-a gasit nici un angajat cu CNP-ul '{cnp}' \n")
+            stil.atentionare(f"Nu s-a gasit nici un angajat cu CNP-ul '{cnp}'")
 
 
 def afisare_toti_angajatii(angajati: list[dict]) -> None:
@@ -457,12 +469,12 @@ def afiseaza_dupa_senioritate(angajati: list[dict]) -> None:
     stil.titlu(" ---> Angajati dupa senioritate")
     while True:
 
-        nivel: str = input(f"Ce nivel cauti, disponibile -> {validari.aceptare_nivel}  sau '0' pentru meniu: ").lower()
+        nivel: str = input(f"Ce nivel cauti, disponibile -> {stil.GALBEN}{validari.aceptare_nivel}{stil.RESET}  sau {stil.GALBEN}'0'{stil.RESET} pentru meniu: ").lower()
         if nivel == "0":
             return
         
         if not validari.senior_validare(nivel):
-            stil.eroare(f"Nivel invalid nivele disponibile {validari.aceptare_nivel}")
+            stil.eroare(f"Nivel invalid, nivele disponibile -> {stil.GALBEN}{validari.aceptare_nivel}{stil.RESET}")
             continue
         break
 
@@ -473,8 +485,10 @@ def afiseaza_dupa_senioritate(angajati: list[dict]) -> None:
             stil.info(f" Angajatul : {persoana['nume']} {persoana['prenume']} este '{persoana['senioritate']}' in departamentul '{persoana['departament']}' ")
             gasit = True
 
-    if not gasit:
-        stil.info(f"Nu exista nici un angajat pe nivelul '{nivel}'")
+    if gasit:
+        return
+    else:
+        stil.atentionare(f"Nu exista nici un angajat pe nivelul '{nivel}'")
     
 def afisare_dupa_departament(angajati: list[dict]) -> None:
     """
@@ -505,7 +519,7 @@ def afisare_dupa_departament(angajati: list[dict]) -> None:
     departamente_disponibile: set = set(persoana["departament"] for persoana in angajati)
     while True:
         
-        departament_cautat: str = input(f"Introdu un departament , disponibile -> {departamente_disponibile} sau '0' pentru meniu: ").strip().upper()
+        departament_cautat: str = input(f"Introdu un departament disponibil -> {stil.GALBEN}{departamente_disponibile}{stil.RESET} sau {stil.GALBEN}'0'{stil.RESET} pentru meniu: ").strip().upper()
         
         if departament_cautat == "0":
             return
@@ -513,10 +527,16 @@ def afisare_dupa_departament(angajati: list[dict]) -> None:
         if not validari.departament_validare(departament_cautat):
             continue 
 
+        if departament_cautat not in departamente_disponibile:
+            stil.atentionare(f"Nu exista nici un departament cu numele -> {stil.evidentiaza(departament_cautat)}")
+            continue
+
         for persoana in angajati:
             if persoana["departament"].upper() == departament_cautat:
                 stil.info(f" {persoana['nume']} {persoana['prenume']} | {persoana['departament']} | {persoana['senioritate']}")
                 gasit = True
 
-        if not gasit:
+        if gasit:
+            return
+        else:
             stil.info(f"Nu exista nici un angajat in departamentul -> {stil.evidentiaza(departament_cautat)}")
