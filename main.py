@@ -46,9 +46,8 @@ def afisare_meniu() -> None:
         - Liniile de separare (-) ajuta la lizibilitate
         - Numerotarea incepe de la 0 pentru consistenta cu input-ul
     """
-    #print("-"*30)
+   
     stil.titlu(" ---> Gestioneaza compania ")
-    #print("-"*30) 
     print("1. Adauga angajat")
     print("2. Cautare angajat (dupa CNP)")
     print("3. Modificare angajat (dupa CNP)")

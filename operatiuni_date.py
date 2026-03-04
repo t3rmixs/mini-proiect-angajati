@@ -68,13 +68,11 @@ def adaugare_angajat(angajati: list[dict]) -> None:
         varsta: str = input(f"Varsta necsara {stil.GALBEN}> 18{stil.RESET}: ")
         if validari.varsta_validare(varsta):
             break
-        #stil.eroare("Varsta trebuie sa fie numerica si > 18 ani.")
 
     while True:
         salar: str = input(f"Salariu Brut {stil.GALBEN}'minim 4050'{stil.RESET}: ")
         if validari.salariu_validare(salar):
             break
-        #stil.eroare(f"Salariu trebuie sa fie mai mare de {validari.salariu_minim} RON.")
     
     while True: 
         departamente_disponibile: set = set(persoana["departament"] for persoana in angajati)
@@ -144,13 +142,6 @@ def cautare_angajat(angajati: list[dict]) -> None:
                 print("")
                 stil.titlu(f"Date gasite pentru : {persoana['nume']} {persoana['prenume']} \n CNP: {persoana['cnp']}\n Varsta: {persoana['varsta']} \n Salariu: {persoana['salar']} RON \n Departament: {persoana['departament']} \n Senioritate: {persoana['senioritate']}")
                 print("")
-                # print(f"CNP: {persoana['cnp']}")
-                # print(f"Varsta: {persoana['varsta']}")
-                # print(f"Salariu: {persoana['salar']} RON")
-                # print(f"Departament: {persoana['departament']}")
-                # print(f"Senioritate: {persoana['senioritate']}")
-
-
                 gasit = True
                 return
         if not gasit:
@@ -307,7 +298,6 @@ def modificare_angajat(angajati: list[dict]) -> None:
 
                 if incarcare_salvare.salveaza_fisier_angajati(angajati):
                     stil.succes(f"Datele pentru angajatul '{persoana['nume']} {persoana['prenume']}' au fost salvate cu success!")
-                    #incearca sa salvezi in fluturas daca exista 
                     cale_fluturas: str = f"fluturasi_angajati/fluturas_{persoana['cnp']}.json"
                     if os.path.exists(cale_fluturas):
                         exportare.actualizare_fluturas_fisier(persoana)
