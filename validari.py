@@ -125,7 +125,7 @@ def validare_nume(text: str) -> bool:
             return False
         
     if len(text) < 3:
-        stil.atentionare(f"Textul este prea scurt ( minim 3 litere). {stil.evidentiaza(text)} ")
+        stil.atentionare(f"Textul este prea scurt ( minim 3 litere), ai introdus ->  {stil.evidentiaza(len(text))}")
         return False
     
     return True
@@ -158,7 +158,7 @@ def varsta_validare(varsta: str) -> bool:
         if varsta >= 18:
             return True
         else:
-            stil.atentionare(f"Varsta trebuie sa fie peste 18 ani , ai introdus -> {stil.evidentiaza(varsta)}")
+            stil.atentionare(f"Varsta trebuie sa fie peste 18 ani , ai introdus -> {stil.evidentiaza(varsta)} ani")
     except ValueError as erroare:
         stil.eroare(f"Varsta trebuie sa fie un numar valid , detalii -> {stil.evidentiaza(erroare)}")
         return False
@@ -194,7 +194,7 @@ def salariu_validare(salar: str) -> bool:
         if valoare >= salariu_minim:
             return True
         else:
-            stil.eroare(f" Salariul trebuie sa fie mai mare de {salariu_minim} RON! ai introdus -> {stil.evidentiaza(valoare)} ")
+            stil.eroare(f" Salariul trebuie sa fie mai mare de {salariu_minim} RON! ai introdus -> {stil.evidentiaza(valoare)} RON ")
             return False 
     except ValueError as erroare:
         stil.eroare(f" Salariu trebuie sa fie un numar valid! Detalii: {stil.evidentiaza(erroare)})")
@@ -224,10 +224,10 @@ def departament_validare(departament: str) -> bool:
         Departamentele sunt stocate in format uppercase pentru consistenta.
     """
     if len(departament) < 2:
-        stil.atentionare(f" Numele departamentului este prea scurt tu ai introdus {stil.evidentiaza(len(departament))} {stil.GALBEN}{stil.BOLD} caracter {stil.RESET} ")
+        stil.atentionare(f" Numele departamentului este prea scurt tu ai introdus {stil.evidentiaza(len(departament))}{stil.GALBEN}{stil.BOLD} caracter {stil.RESET} ")
         return False    
     if not departament.isalnum():
-        stil.eroare(f" Departamentul nu poate contine caractere speciale , poate sa contina doar Litere/Cifre")
+        stil.eroare(f" Departamentul nu poate contine caractere speciale , poate sa contina doar litere/cifre")
         return False
 
     return True

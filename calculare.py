@@ -151,4 +151,4 @@ def calcul_fluturas_salariu(angajati: list[dict]) -> None:
                         stil.atentionare("Te rugam sa introduci doar (da/nu)")
                 return
                              
-        stil.info(f"Nu am gasit nici un angajat cu CNP-ul {cnp} , incearca din nou sau {stil.GALBEN}'0'{stil.RESET} {stil.CYAN}pentru meniu{stil.RESET}")
+        stil.atentionare(f"Nu am gasit nici un angajat cu CNP-ul '{cnp}' ")

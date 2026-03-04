@@ -220,7 +220,7 @@ def modificare_angajat(angajati: list[dict]) -> None:
                             continue
                         else:
                             persoana["cnp"] = cnp_nou
-                            stil.succes(f"CNP-ul a fost actualizat cu succes: {cnp_nou}")
+                            stil.succes(f"CNP-ul a fost actualizat din {cnp_vechi} in {cnp_nou}")
 
                             cale_veche: str = f"fluturasi_angajati/fluturas_{cnp_vechi}.json"
                             cale_noua: str = f"fluturasi_angajati/fluturas_{cnp_nou}.json"
@@ -235,9 +235,9 @@ def modificare_angajat(angajati: list[dict]) -> None:
                                     json.dump(date_fluturas, my_file, indent=4)
 
                                 os.remove(cale_veche)
-                                stil.info(f" Fisierul fluturas a fost redenumit din '{cnp_vechi}' in '{cnp_nou}' ")
+                                stil.succes(f" Fisierul fluturas a fost redenumit din '{cnp_vechi}' in '{cnp_nou}' ")
                             break
-
+                nume_vechi = persoana["nume"]
                 nume_nou: str = input(f"Introdu un nume nou sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip().title()
                 if nume_nou:
                     while not validari.validare_nume(nume_nou):
@@ -246,8 +246,9 @@ def modificare_angajat(angajati: list[dict]) -> None:
                             break
                     if nume_nou:
                         persoana["nume"] = nume_nou.title()
-                        stil.succes(f"Numele a fost actualizat in: {nume_nou}")
+                        stil.succes(f"Numele a fost actualizat din {nume_vechi} in {nume_nou}")
 
+                prenume_vechi = persoana["prenume"]
                 prenume_nou: str = input(f"Introdu un prenume nou sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip().title()
                 if prenume_nou:
                     while not validari.validare_nume(prenume_nou):
@@ -256,9 +257,9 @@ def modificare_angajat(angajati: list[dict]) -> None:
                             break
                     if prenume_nou:
                         persoana["prenume"] = prenume_nou.title()
-                        stil.succes(f"Prenumele a fost actualizat in: {prenume_nou}")
+                        stil.succes(f"Prenumele a fost actualizat din {prenume_vechi} in {prenume_nou}")
 
-
+                varsta_veche = persoana["varsta"]
                 varsta_noua: str = input(f"Introdu o varsta noua sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ")
                 if varsta_noua:
                     while not validari.varsta_validare(varsta_noua):
@@ -267,8 +268,9 @@ def modificare_angajat(angajati: list[dict]) -> None:
                             break
                     if varsta_noua:
                         persoana["varsta"] = int(varsta_noua)
-                        stil.succes(f"Varsta a fost actualizat in: {varsta_noua}")
+                        stil.succes(f"Varsta a fost actualizata din {varsta_veche} ani in {varsta_noua} ani")
                 
+                salariu_vechi = persoana["salar"]
                 salariu_nou: str = input(f"Introdu un salariu nou ({stil.GALBEN} minim {validari.salariu_minim}{stil.RESET}) sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ")
                 if salariu_nou:
                     while not validari.salariu_validare(salariu_nou):
@@ -277,8 +279,9 @@ def modificare_angajat(angajati: list[dict]) -> None:
                             break
                     if salariu_nou:
                         persoana["salar"] = float(salariu_nou)
-                        stil.succes(f"Salariul a fost actualizat in: {salariu_nou}")
+                        stil.succes(f"Salariul a fost actualizat din {salariu_vechi} RON in {salariu_nou} RON")
 
+                departament_vechi = persoana["departament"]
                 departamente_disponibile: set = set(persoana["departament"] for persoana in angajati)
                 departament_nou: str = input(f"Introdu un departament nou, disponibile -> {stil.GALBEN}{departamente_disponibile}{stil.RESET} sau creaza unu nou: ").strip().upper()
                 if departament_nou:
@@ -288,8 +291,9 @@ def modificare_angajat(angajati: list[dict]) -> None:
                             break
                     if departament_nou:
                         persoana["departament"] = departament_nou
-                        stil.succes(f"Departamentul a fost actualizat in: {departament_nou}")
+                        stil.succes(f"Departamentul a fost actualizat din {departament_vechi} in {departament_nou}")
                 
+                senioritate_veche = persoana["senioritate"]
                 senioritate_noua: str = input(f"Introdu o senioritate noua, disponibile -> {stil.GALBEN}{validari.aceptare_nivel}{stil.RESET} sau apasa {stil.GALBEN}'enter'{stil.RESET} pentru a-l pastra: ").strip().lower()
                 if senioritate_noua:
                     while not validari.senior_validare(senioritate_noua):
@@ -299,7 +303,7 @@ def modificare_angajat(angajati: list[dict]) -> None:
                             break
                     if senioritate_noua:
                         persoana["senioritate"] = senioritate_noua
-                        stil.succes(f"Senioritatea a fost actualizat in: {senioritate_noua}")
+                        stil.succes(f"Senioritatea a fost actualizat din {senioritate_veche} in {senioritate_noua}")
 
                 if incarcare_salvare.salveaza_fisier_angajati(angajati):
                     stil.succes(f"Datele pentru angajatul '{persoana['nume']} {persoana['prenume']}' au fost salvate cu success!")

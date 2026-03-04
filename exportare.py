@@ -188,7 +188,7 @@ def afisare_fluturas_din_fisier() -> None:
         nume_fisier: str = (f"{folder}/fluturas_{cnp}.json")
 
         if not os.path.exists(nume_fisier):
-            stil.info(f"Nu s-a gasit nici un fluturas exportat pentru CNP-u: {stil.evidentiaza(cnp)}")
+            stil.atentionare(f"Nu s-a gasit nici un fluturas exportat pentru CNP-ul {stil.evidentiaza(cnp)}")
             return
         
         stil.titlu(f" ---> Fluturas salariu din fisierul {nume_fisier}")

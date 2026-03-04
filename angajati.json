@@ -45,15 +45,6 @@
         "senioritate": "mid"
     },
     {
-        "cnp": "8787878787878",
-        "nume": "Asdas",
-        "prenume": "Dasd",
-        "varsta": 18,
-        "salar": 12354.0,
-        "departament": "A",
-        "senioritate": "mid"
-    },
-    {
         "cnp": "8797897897891",
         "nume": "Asd",
         "prenume": "Sad",
@@ -70,5 +61,14 @@
         "salar": 4050.0,
         "departament": "22",
         "senioritate": "senior"
+    },
+    {
+        "cnp": "8888888888855",
+        "nume": "Testmenume",
+        "prenume": "Testmeprenume",
+        "varsta": 22,
+        "salar": 8888.0,
+        "departament": "MARKETING",
+        "senioritate": "mid"
     }
 ]
