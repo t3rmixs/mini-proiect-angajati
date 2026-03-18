@@ -75,10 +75,10 @@ def exporteaza_fluturas(angajati: list[dict]) -> None:
                     "cnp" : persoana['cnp'],
                     "Departament" : persoana['departament'],
                     "Salariu brut" : brut,
-                    "Cas (10%)" : round(cas) /2 ,
-                    "Cass (25%)" : round(cass) /2,
-                    "Impozit (10%)" : round(impozit) /2,
-                    "Salariu net" : round(net) /2
+                    "Cas (25%)" : round(cas / 2),
+                    "Cass (10%)" : round(cass / 2),
+                    "Impozit (10%)" : round(impozit / 2),
+                    "Salariu net" : round(net / 2)
                 }
 
                 with open(nume_fisier, "w") as my_file:
